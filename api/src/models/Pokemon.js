@@ -6,6 +6,8 @@ module.exports = (sequelize) => {
   sequelize.define('pokemon', {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4, 
+      allowNull: false,
       primaryKey: true,
     },
     name: {
@@ -30,6 +32,11 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.INTEGER,
     },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    
   }  );
 };
 
