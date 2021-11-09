@@ -8,12 +8,9 @@ const infoTypeApy = async () => {
       return {
         name: type.name,
         url: type.url
-      }
-    })
+      };
+    });
     return typeList;
-  }
+  };
 
-
-module.exports = {
-    infoTypeApy,    
-    }
+module.exports = { infoTypeApy };

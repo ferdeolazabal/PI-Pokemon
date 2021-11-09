@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     life: {
       type: DataTypes.INTEGER,
@@ -32,11 +33,16 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.INTEGER,
     },
+    img:{
+      type: DataTypes.STRING,
+      validate: {isUrl: true},
+      defaultValue: "https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-0.png"
+    },
     createdInDb: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
     
-  }  );
+  },  { timestamps: false } );
 };
 
