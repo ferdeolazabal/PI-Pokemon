@@ -86,7 +86,6 @@ const getPokeByName = async (name) => {
     const pokeByName = pokeList.filter(poke => poke.name === name);
     
     return pokeByName;
-
 };
 
 module.exports = {

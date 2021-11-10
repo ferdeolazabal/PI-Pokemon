@@ -65,7 +65,7 @@ router.post('/pokemons', async (req, res, next) => {
     try {
 
         const newPokemon = await Pokemon.create({
-            name, img, life, attack, defense, speed, height, weight
+            name, life, attack, defense, speed, height, weight, img
         });
         await newPokemon.setTypes(types);
 

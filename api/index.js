@@ -27,12 +27,17 @@ conn.sync({ force: false }).then(() => {
     
     try{
       const typeList= await infoTypeApy();
-                      await Type.bulkCreate(typeList);
-
+      const foundTypesDB = await Type.findAll({
+        attributes: ['name']
+      });
+      
+      if(foundTypesDB.length === 0){
+        await Type.bulkCreate(typeList)
+      }
     } catch(error) {
       next(error);
     }
       console.log('server listening at 3001'); // eslint-disable-line no-console
-      console.log('DB connected, pokemon types preloaded');
+      console.log('DB connected, pokemon types preloaded!');
   });
 }); 
