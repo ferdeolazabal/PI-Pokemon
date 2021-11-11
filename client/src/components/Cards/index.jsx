@@ -11,7 +11,7 @@ export default function Cards ({ pokemons }) {
                         key={pokemon.id}
                         name={pokemon.name}
                         img={pokemon.img}
-                        // types={pokemon.types}
+                        types={pokemon.types}
                     />)
             }
         </div>

@@ -1,10 +1,9 @@
 const axios = require('axios');
 const { Pokemon, Type } = require('../db')
 
-
 // Lista Pokemons desde api
 const getPokeList = async () => {
-
+    
     try {
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=3`); // obj con name, url
         const resApiResults  = await apiUrl.data.results.map(obj => axios.get(obj.url));
@@ -15,19 +14,83 @@ const getPokeList = async () => {
                 id: poke.id,
                 name: poke.name,
                 img: poke.sprites.other.dream_world.front_default,
+                life: poke.stats[0].base_stat,
+                attack: poke.stats[1].base_stat,
+                defense: poke.stats[2].base_stat,
+                speed: poke.stats[5].base_stat,
+                height: poke.height,
+                weight: poke.weight,
                 types: poke.types.map(type => type.type.name),
             };
         });
-            return infoPokemons;
-
+        return infoPokemons;
+        
     } catch (err) {
         console.log(err);
         return err
     };
 };
+
+// Lista Pokemons desde la DB
+const getDbInfo = async () => {
+
+    let pokeArray = [];
+    
+    try {
+        const pokemons = await Pokemon.findAll({
+            include: { model: Type },
+        });
+
+        for(var i = 0; i < pokemons.length; i++){
+            let poke = pokemons[i];
+            let pokeObj = {
+                id: poke.id,
+                name: poke.name,
+                img: poke.img,
+                life: poke.life,
+                attack: poke.attack,
+                defense: poke.defense,
+                speed: poke.speed,
+                height: poke.height,
+                weight: poke.weight,
+                createdInDb: poke.createdInDb,
+            }
+
+            if(poke.types.length === 1) pokeObj.types = [ poke.types[0].name];
+            else pokeObj.types = [ poke.types[0].name, poke.types[1].name];
+
+            pokeArray.push(pokeObj);
+        }
+        return pokeArray;
+        
+    } catch (err) {
+        console.log(err);
+        return err
+    };
+};
+
+// lista Pokemons desde API y DB
+const getAllPokemons = async () => {
+
+    const apiInfo = await getPokeList();
+    const dbInfo = await getDbInfo();
+    const totalPokemons = [ ...apiInfo, ...dbInfo ];
+
+    return totalPokemons;
+}
+
+// Lista Pokemons desde API y DB por nombre
+const getPokeByName = async (name) => {
+
+    const pokeList = await getAllPokemons();
+    const pokeByName = pokeList.filter(poke => poke.name === name);
+    
+    return pokeByName;
+};
+
 // Lista Pokemons desde api por ID
 const getPokeById = async (id) => {
-
+    
     try{
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const infoPoke = apiUrl.data;
@@ -49,43 +112,6 @@ const getPokeById = async (id) => {
         console.log(err);
         return err
     };
-};
-// Lista Pokemons desde DB
-const getDbInfo = async () => {
-    
-    return await Pokemon.findAll({
-
-        include: {
-            model: Type,
-            atributes: ["Type"],
-            throught: {
-                atributes: [],
-            },
-        },
-    });
-    
-};
-// lista Pokemons desde API y DB
-const getAllPokemons = async () => {
-
-    const apiInfo = await getPokeList();
-    const dbInfo = await getDbInfo();
-    const totalPokemons = [ ...apiInfo, ...dbInfo ];
-
-    return totalPokemons;
-}
-
-const getPokeByName = async (name) => {
-
-    // await Pokemon.findOne({
-    //     where: { name },
-    //     include: { model: Type }
-    // });
-
-    const pokeList = await getAllPokemons();
-    const pokeByName = pokeList.filter(poke => poke.name === name);
-    
-    return pokeByName;
 };
 
 module.exports = {
