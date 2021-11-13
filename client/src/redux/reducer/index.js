@@ -5,7 +5,7 @@ import {
     // POST_POKEMONS,
     // FILTER_POKEMON_BY_NAME,
     // FILTER_POKEMON_BY_TYPE,
-    // FILTER_POKEMON_BY_SOURCE,
+    FILTER_POKEMON_BY_SOURCE,
     // SORT_POKEMON_BY_NAME,
     // SORT_POKEMON_BY_STRENGTH
 } from '../actions';
@@ -14,7 +14,7 @@ import {
 
 const initialState = {
     pokemons: [],
-    allPokemon: [],
+    filterPokemon: [],
     types: [],
     
 };
@@ -25,7 +25,7 @@ function rootReducer( state = initialState, { type, payload } ) {
             return {
                 ...state,
                 pokemons: payload,
-                allPokemon: payload,
+                filterPokemon: payload,
             };
         case GET_TYPES:
             return {
@@ -52,18 +52,23 @@ function rootReducer( state = initialState, { type, payload } ) {
         //         ...state,
         //         pokemons: payload,
         //     };
-        // case FILTER_POKEMON_BY_SOURCE:
-        //     return {
-        //         ...state,
-        //         pokemons: payload,
-        //     };
+        case FILTER_POKEMON_BY_SOURCE:
+        const allPokemons = state.filterPokemon;
+        const db  = allPokemons.filter(p => p.createdInDb === true);
+        const api = allPokemons.filter(p => !p.createdInDb);
+            return {
+                ...state,
+                pokemons: payload === 'db' ? db
+                        : payload === 'api' ? api : allPokemons
+
+            };
         // case SORT_POKEMON_BY_NAME:
         //     return {
         //         ...state,
         //         pokemons: payload,
         //     };
         // case SORT_POKEMON_BY_STRENGTH:
-        //     return {
+        //     return { 
         //         ...state,
         //         pokemons: payload,
         //     };        

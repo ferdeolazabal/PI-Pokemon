@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getPokeById, getAllPokemons, getPokeByName } = require('../Controllers/pokemon')
+const { getPokeById, getAllPokemons, getPokeByName, getDbInfo, getPokeList } = require('../Controllers/pokemon')
 const { Pokemon } = require('../db')
 
 // [ ] GET /pokemons: OK
@@ -17,7 +17,10 @@ router.get('/pokemons', async (req, res, next) => {
         if (!name) {
 
             const response = await getAllPokemons();
+            // const responseDb = await getDbInfo();
+            // const responseApi = await getPokeList();
             res.json(response);
+            // res.json({ responseApi, responseDb });
 
         } else {
             const PokeName = await getPokeByName(name);
@@ -69,7 +72,7 @@ router.post('/pokemons', async (req, res, next) => {
         });
         await newPokemon.setTypes(types);
 
-		res.send( { newPokemon, types} );
+		res.json( { newPokemon, types} );
 
     } catch (error) {
         next(error);

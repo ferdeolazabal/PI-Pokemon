@@ -1,0 +1,8 @@
+.pagination{
+    background-color: #2f3542;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 10px;
+    
+}

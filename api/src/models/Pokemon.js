@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4, 
       allowNull: false,
       primaryKey: true,
+      unique: true
     },
     name: {
       type: DataTypes.STRING,
@@ -34,8 +35,8 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     img:{
-      type: DataTypes.STRING,
-      validate: {isUrl: true},
+      type: DataTypes.TEXT,
+      // validate: {isUrl: true},
       defaultValue: "https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-0.png"
     },
     createdInDb: {

@@ -1,17 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './index.css'
 
-export default function Card ( { name, img, types  } ) {
-// export default function Card ( props ) {
+export default function Card ( { id,  name, img, types } ) {
 
-
-    // console.log(props)
 
     return (
     <div className="card">
-        <h2>{ name }</h2>
+        <Link to={`/pokemons/id/${id}`} className="link">
+        <h1>{ name }</h1>
         <img className="img" src={ img } alt={ name } />
-        <h3> Types: { types?.map((name, id)=><h4 key={id}>{name}</h4>)}</h3>
+        </Link>
+        <h3> Types:</h3>
+        <span>{ types?.map((name, id)=><h3 key={id}>{name}</h3>)}</span>
     </div>
     )
 };

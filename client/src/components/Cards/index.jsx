@@ -9,6 +9,7 @@ export default function Cards ({ pokemons }) {
                 pokemons?.map(pokemon => 
                     <Card
                         key={pokemon.id}
+                        id={pokemon.id}
                         name={pokemon.name}
                         img={pokemon.img}
                         types={pokemon.types}

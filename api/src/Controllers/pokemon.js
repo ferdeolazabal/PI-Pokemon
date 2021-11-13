@@ -4,8 +4,10 @@ const { Pokemon, Type } = require('../db')
 // Lista Pokemons desde api
 const getPokeList = async () => {
     
+    const ttlPoke = 3;    
+    
     try {
-        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=3`); // obj con name, url
+        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=${ ttlPoke }`); // obj con name, url
         const resApiResults  = await apiUrl.data.results.map(obj => axios.get(obj.url));
         const infoUrlPoke = await axios.all(resApiResults); // proms resuelta
         const fullDataPokemons = infoUrlPoke.map(obj => obj.data);
@@ -54,11 +56,10 @@ const getDbInfo = async () => {
                 height: poke.height,
                 weight: poke.weight,
                 createdInDb: poke.createdInDb,
-            }
-
-            if(poke.types.length === 1) pokeObj.types = [ poke.types[0].name];
-            else pokeObj.types = [ poke.types[0].name, poke.types[1].name];
-
+            };
+            // console.log("poke.types",poke.types)
+            // if(poke.types.length === 1) pokeObj.types = [ poke.types[0].name];
+            // else pokeObj.types = [ poke.types[0].name, poke.types[1].name];
             pokeArray.push(pokeObj);
         }
         return pokeArray;
