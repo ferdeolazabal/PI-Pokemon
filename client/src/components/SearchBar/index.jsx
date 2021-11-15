@@ -18,7 +18,7 @@ export default function SearchBar() {
         <div className="navbar">
             <Link to="/home" className="link"><h1>Pokemon App</h1></Link>
             <form>    
-                <input type="text" placeholder="Search" onChange={handleSearch} />
+                <input type="text" placeholder="Search" onChange={ e => handleSearch(e)} />
             </form>
             <Link to="/pokemoncreate" className="btn">Create a Pokemon</Link>
         </div>

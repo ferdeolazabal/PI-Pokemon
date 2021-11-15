@@ -4,7 +4,7 @@ const { Pokemon, Type } = require('../db')
 // Lista Pokemons desde api
 const getPokeList = async () => {
     
-    const ttlPoke = 3;    
+    const ttlPoke = 40;
     
     try {
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=${ ttlPoke }`); // obj con name, url
@@ -15,13 +15,13 @@ const getPokeList = async () => {
             return {
                 id: poke.id,
                 name: poke.name,
-                img: poke.sprites.other.dream_world.front_default,
                 life: poke.stats[0].base_stat,
                 attack: poke.stats[1].base_stat,
                 defense: poke.stats[2].base_stat,
                 speed: poke.stats[5].base_stat,
                 height: poke.height,
                 weight: poke.weight,
+                img: poke.sprites.other.dream_world.front_default,
                 types: poke.types.map(type => type.type.name),
             };
         });
