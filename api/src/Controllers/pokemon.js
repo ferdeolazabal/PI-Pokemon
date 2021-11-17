@@ -96,8 +96,8 @@ const getPokeByName = async (name) => {
                 speed: searchPokeNameDB.speed,
                 height: searchPokeNameDB.height,
                 weight: searchPokeNameDB.weight,
-                sprite: searchPokeNameDB.sprite,
-                types: searchPokeNameDB.types.length < 2 ? [searchPokeNameDB.types[0]] : [searchPokeNameDB.types[0], searchPokeNameDB.types[1]]
+                img: searchPokeNameDB.sprite,
+                types: searchPokeNameDB.types.map(type => type.type.name)
             }
             return pokedbName;
         }else {

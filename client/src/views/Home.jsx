@@ -22,7 +22,7 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
         <>
-            { pokemons.length > 1 ?
+            { pokemons.length >= 1 ?
             <div className='container'>
                 <NavBar />
                 <FilterSorts />

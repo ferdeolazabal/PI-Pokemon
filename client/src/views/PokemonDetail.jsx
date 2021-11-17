@@ -14,21 +14,9 @@ const PokemonDetail = () => {
         dispatch(getPokemonDetail( id ))
     }, [ dispatch, id ]);
 
-    // console.log('ide',id);
-
     const { img, life, types, name, height, attack, defense, speed, weight } = pokemonDetail;
 
-    // if (pokemonDetail.length === 0) {
-    //     return (
-    //         <div>
-    //             <NavBar />
-    //             <FilterSorts />
-    //             <div className="loading" >
-    //                 <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." />
-    //             </div>
-    //         </div>
-    //     )
-    // }    
+    console.log(pokemonDetail);
 
     return (
         <>
