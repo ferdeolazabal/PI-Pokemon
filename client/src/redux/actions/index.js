@@ -7,7 +7,7 @@ export const GET_POKEMONS_DETAIL      = 'GET_POKEMONS_DETAIL';
 export const FILTER_POKEMON_BY_TYPE   = 'FILTER_POKEMON_BY_TYPE';
 export const FILTER_POKEMON_BY_SOURCE = 'FILTER_POKEMON_BY_SOURCE';
 export const SORT_POKEMONS            = 'SORT_POKEMONS';
-// export const POST_POKEMONS            = 'POST_POKEMONS';
+export const GET_POKEMON_BY_NAME      = 'GET_POKEMON_BY_NAME';
 
 
 export function getPokemons () {
@@ -58,12 +58,27 @@ export const sortPokemons = ( payload ) => {
 
 export const getPokemonDetail = ( id ) => {
         
-        return async (dispatch) => {
-            console.log(`constants : ${ constants.POKEMONS_URL }/${ id }`);
-            const pokemon = await axios.get( `${ constants.POKEMONS_URL }/id/${ id }` );
-            return dispatch({
-                type: GET_POKEMONS_DETAIL,
-                payload: pokemon.data
-            });
-        };
+    return async (dispatch) => {
+        const pokemon = await axios.get( `${ constants.POKEMONS_URL }/id/${ id }` );
+        return dispatch({
+            type: GET_POKEMONS_DETAIL,
+            payload: pokemon.data
+        });
     };
+};
+
+export const getPokemonName = (name) => {
+    return async (dispatch) => {
+        try {
+            const pokemonName = await axios(`http://localhost:3001/pokemons?name=${name}`);
+            const pokeArray = [];
+            pokeArray.push(pokemonName.data);
+            return dispatch({
+                type: GET_POKEMON_BY_NAME,
+                payload: pokeArray
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}

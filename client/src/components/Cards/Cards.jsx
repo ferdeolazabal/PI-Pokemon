@@ -1,8 +1,9 @@
 import React from 'react'
-import Card from '../Card'
-import './index.css'
+import Card from '../Card/Card'
+import './Cards.css'
 
 export default function Cards ({ pokemons }) {
+
     return (
         <div className="cards">
             {

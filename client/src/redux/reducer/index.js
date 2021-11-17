@@ -5,9 +5,7 @@ import {
     FILTER_POKEMON_BY_SOURCE,
     SORT_POKEMONS,
     GET_POKEMONS_DETAIL,
-    // POST_POKEMONS,
-    // FILTER_POKEMON_BY_NAME,
-    // SORT_POKEMON_BY_STRENGTH
+    GET_POKEMON_BY_NAME
 } from '../actions';
 
 const initialState = {
@@ -15,6 +13,7 @@ const initialState = {
     filterPokemon: [],
     types: [],
     pokemonDetail: [],
+    pokesearch: [],
 };
 
 function rootReducer( state = initialState, { type, payload } ) {
@@ -31,13 +30,13 @@ function rootReducer( state = initialState, { type, payload } ) {
                 types: payload,
             };
         case FILTER_POKEMON_BY_SOURCE:
-            const allPokemons = state.filterPokemon;
-            const db  = allPokemons.filter(p => p.createdInDb === true);
-            const api = allPokemons.filter(p => !p.createdInDb);
+            const pokemonsSource = state.filterPokemon;
+            const db  = pokemonsSource.filter(p => p.createdInDb === true);
+            const api = pokemonsSource.filter(p => !p.createdInDb);
                 return {
                     ...state,
                     pokemons: payload === 'db' ? db
-                            : payload === 'api' ? api : allPokemons
+                            : payload === 'api' ? api : pokemonsSource
                 };
         case FILTER_POKEMON_BY_TYPE:
             const totalPokemons = state.filterPokemon;
@@ -84,30 +83,19 @@ function rootReducer( state = initialState, { type, payload } ) {
                             payload === 'lh' ? pokemonsSortedByStrengthLH : pokemons,
             };
         case GET_POKEMONS_DETAIL:
-        console.log( 'payload reducer', payload );
             return {
                     ...state,
                     pokemonDetail: payload,
             };
-        // case POST_POKEMONS:
-        //     return {    
-        //         ...state,
-        //         pokemons: payload,
-        //     };
-        // case FILTER_POKEMON_BY_NAME:
-        //     return {
-        //         ...state,
-        //         pokemons: payload,
-        //     };
-        // case SORT_POKEMON_BY_STRENGTH:
-        //     return { 
-        //         ...state,
-        //         pokemons: payload,
-        //     };        
+        case GET_POKEMON_BY_NAME:
+            return {
+                ...state,
+                // pokesearch: [ ...state.pokesearch, payload ],
+                pokesearch: payload,
+            };
         default:
             return state;
         };
     };
 
 export default rootReducer;
-

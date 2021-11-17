@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getPokemonDetail } from '../redux/actions';
-import SearchBar from '../components/SearchBar';
+import NavBar from '../components/NavBar/NavBar.jsx';
 
 const PokemonDetail = () => {
 
@@ -14,26 +14,36 @@ const PokemonDetail = () => {
         dispatch(getPokemonDetail( id ))
     }, [ dispatch, id ]);
 
-    console.log('ide',id);
+    // console.log('ide',id);
 
     const { img, life, types, name, height, attack, defense, speed, weight } = pokemonDetail;
 
-    console.log('pokemonDetail', pokemonDetail);
-    console.log('types', types);
+    // if (pokemonDetail.length === 0) {
+    //     return (
+    //         <div>
+    //             <NavBar />
+    //             <FilterSorts />
+    //             <div className="loading" >
+    //                 <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." />
+    //             </div>
+    //         </div>
+    //     )
+    // }    
 
     return (
         <>
-            <SearchBar />
+            <NavBar />
             {img && types && name ?
             <div className="containerDetail">
                 <div className="cardDetail">
+                    {id}
                     <h1 className="name">{ name }</h1>
                     <img className="imgDetail" src={ img } alt={ name } />
                     <div className="types">
-                        { types?.map(type => (
-                            <span key={ type.name }>{ type.name }</span>
+                        { types?.map(types => (
+                            <span key={ types.name }>{ types.name }</span>
                         )) }
-                        <span>{types[0]}{types[1]}</span>
+                        <span>type: {types[0]}{types[1]}</span>
                     </div>
                     <div className="stats">
                         <section>
@@ -65,7 +75,9 @@ const PokemonDetail = () => {
                 </div>
             </div>
         </div>
-        : `Loading...`
+        :   <div className="loading" >
+                <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." />
+            </div>
         }
         </>
     );
