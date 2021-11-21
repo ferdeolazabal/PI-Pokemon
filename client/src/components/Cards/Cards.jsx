@@ -5,7 +5,7 @@ import './Cards.css'
 export default function Cards ({ pokemons }) {
 
     return (
-        <div className="cards">
+        <div className={ pokemons.length < 2 ? "onecard" : "cards" }>
             {
                 pokemons?.map(pokemon => 
                     <Card
@@ -13,7 +13,9 @@ export default function Cards ({ pokemons }) {
                         id={pokemon.id}
                         name={pokemon.name}
                         img={pokemon.img}
-                        types={pokemon.types}
+                        types={ pokemons.types && pokemon.types[0].PokemonType ?
+                                pokemon.types.map(type => type.name)  : 
+                                pokemon.types }
                     />)
             }
         </div>

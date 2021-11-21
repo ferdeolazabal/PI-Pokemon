@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getPokemonDetail } from '../redux/actions';
 import NavBar from '../components/NavBar/NavBar.jsx';
+import './pokemondetail.css'
+
 
 const PokemonDetail = () => {
 
@@ -16,58 +18,59 @@ const PokemonDetail = () => {
 
     const { img, life, types, name, height, attack, defense, speed, weight } = pokemonDetail;
 
-    console.log(pokemonDetail);
 
     return (
-        <>
+        <div className="detailcontainer">
             <NavBar />
-            {img && types && name ?
-            <div className="containerDetail">
-                <div className="cardDetail">
-                    {id}
-                    <h1 className="name">{ name }</h1>
+            { types && name ?
+            <div className="">
+                    <h1 className="name">{ name.toUpperCase() }</h1>
+                    <span> N°{ id }</span>
+                    <div className="containerDetail">
                     <img className="imgDetail" src={ img } alt={ name } />
+                <div className="cardDetail">
                     <div className="types">
                         { types?.map(types => (
                             <span key={ types.name }>{ types.name }</span>
                         )) }
-                        <span>type: {types[0]}{types[1]}</span>
+                        <span>Type: {types[0]} | {types[1]}</span>
                     </div>
                     <div className="stats">
                         <section>
-                            <p>Data</p>
-                            <>
-                                <span>{`Height: ${ height } `}</span>
-                                <span>{`Weight: ${ weight }`}</span>
-                            </>
+                            <p>
+                                <span>{`Height: ${ height / 10 } Mt || `}</span>
+                                <span>{`Weight: ${ weight / 10 } Kg`}</span>
+                            </p>
                         </section>
                         <section>
-                            <p>Stats</p>
-                            <div>
+                            <p>
+                            <>
                                 <span>{ `Life: ${ life } `}</span>
-                                <progress value={ life } max="200" />
-                            </div>
-                            <div>
+                                <progress value={ life } max="100" />
+                            </>
+                            <>
                                 <span>{ `Attack: ${ attack } `}</span>
-                                <progress value={ attack } max="200" />
-                            </div>
-                            <div>
+                                <progress value={ attack } max="100" />
+                            </>
+                            <>
                                 <span>{ `Defense: ${ defense } `}</span>
-                                <progress value={ defense } max="200" />
-                            </div>
-                            <div>
+                                <progress value={ defense } max="100" />
+                            </>
+                            <>
                                 <span>{ `Speed: ${ speed } `}</span>
-                                <progress value={ speed } max="200" />
-                            </div>
+                                <progress value={ speed } max="100" />
+                            </>
+                            </p>
                         </section>
                 </div>
             </div>
+        </div>
         </div>
         :   <div className="loading" >
                 <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." />
             </div>
         }
-        </>
+        </div>
     );
 };
 

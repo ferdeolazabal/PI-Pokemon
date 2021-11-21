@@ -10,7 +10,7 @@ export default function Paginate( { pokemonsPerPage, allPokemons, paginate } ) {
     }
 
     return (
-        <nav>
+        <>
             <ul className="pagination">
                 { pageNumbers?.map( number => (
                     <li key={ number } className="page-item">
@@ -20,7 +20,7 @@ export default function Paginate( { pokemonsPerPage, allPokemons, paginate } ) {
                     </li>
                 ) ) }
             </ul>
-        </nav>
+        </>
     );
 
 

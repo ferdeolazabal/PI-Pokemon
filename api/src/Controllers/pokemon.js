@@ -7,7 +7,7 @@ const getPokeList = async () => {
     const ttlPoke = 40;
     
     try {
-        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=${ ttlPoke }`); // obj con name, url
+        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${ ttlPoke }`); // obj con name, url
         const resApiResults  = await apiUrl.data.results.map(obj => axios.get(obj.url));
         const infoUrlPoke = await axios.all(resApiResults); // proms resuelta
         const fullDataPokemons = infoUrlPoke.map(obj => obj.data);
@@ -42,7 +42,7 @@ const getDbInfo = async () => {
         const pokemons = await Pokemon.findAll({
             include: { model: Type },
         });
-        // console.log('pokemons ', pokemons);
+        // console.log('lista pokemons desde DB' ,pokemons)
         pokemons.forEach(poke => {
             const pokeInfo = {
                 id: poke.id,
@@ -61,7 +61,6 @@ const getDbInfo = async () => {
         });
         return pokeArray;
         
-        
     } catch (err) {
         console.log(err);
         return err
@@ -74,46 +73,45 @@ const getAllPokemons = async () => {
     const apiInfo = await getPokeList();
     const dbInfo = await getDbInfo();
     const totalPokemons = [ ...apiInfo, ...dbInfo ];
-    // const totalPokemons = [ ...apiInfo ]
 
     return totalPokemons;
-}
+};
 
 // Lista Pokemons desde API y DB por nombre
 const getPokeByName = async (name) => {
     try {
+        
         const searchPokeNameDB = await Pokemon.findOne({
-            where: { name },            //encuentra primera coincidencia
+            where: { name },
             include: { model: Type }
         })
+        // console.log('name DB bulk',searchPokeNameDB)
         if (searchPokeNameDB) {
-            let pokedbName = {
-                id: searchPokeNameDB.id,
-                name: searchPokeNameDB.name,
-                life: searchPokeNameDB.life,
-                attack: searchPokeNameDB.attack,
-                defense: searchPokeNameDB.defense,
-                speed: searchPokeNameDB.speed,
-                height: searchPokeNameDB.height,
-                weight: searchPokeNameDB.weight,
-                img: searchPokeNameDB.sprite,
-                types: searchPokeNameDB.types.map(type => type.type.name)
-            }
-            return pokedbName;
+            return searchPokeNameDB;
+        //     let pokedbName = {
+        //         id: searchPokeNameDB.dataValues.id,
+        //         name: searchPokeNameDB.dataValues.name,
+        //         life: searchPokeNameDB.dataValues.life,
+        //         attack: searchPokeNameDB.dataValues.attack,
+        //         defense: searchPokeNameDB.dataValues.defense,
+        //         speed: searchPokeNameDB.dataValues.speed,
+        //         height: searchPokeNameDB.dataValues.height,
+        //         weight: searchPokeNameDB.dataValues.weight,
+        //         img: searchPokeNameDB.dataValues.sprite,
+        //         types: searchPokeNameDB.dataValues.types.map(type => type.type.name)
+        //     }
+        //     console.log('name DB map',pokedbName)
+        //     return pokedbName;
         }else {
-            const searchPokeapiName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);       //obtengo el pokemon de la url/name
+            const searchPokeapiName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
             const foundPokeapiName = objPokeApi(searchPokeapiName.data);
-            // console.log('foundPokeapi', foundPokeapiName)
             return foundPokeapiName
-        }
+        };
     } catch (error) {
         console.log(error);
         return error;
-    }
+    };
 };
-
-
-
 
 // Lista Pokemons desde api por ID
 const getPokeById = async (id) => {
@@ -121,18 +119,8 @@ const getPokeById = async (id) => {
     try{
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const infoPoke = apiUrl.data;
-        const pokeDetail = {
-            id: infoPoke.id,
-            name: infoPoke.name,
-            life: infoPoke.stats[0].base_stat,
-            attack: infoPoke.stats[1].base_stat,
-            defense: infoPoke.stats[2].base_stat,
-            speed: infoPoke.stats[5].base_stat,
-            height: infoPoke.height,
-            weight: infoPoke.weight,
-            img: infoPoke.sprites.other.dream_world.front_default,
-            types: infoPoke.types.map(type => type.type.name),
-        };
+        const pokeDetail = objPokeApi(infoPoke);
+        
         return pokeDetail;
 
     } catch (err) {

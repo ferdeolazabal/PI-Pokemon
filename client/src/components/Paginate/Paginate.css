@@ -3,14 +3,6 @@
     display: flex;
     justify-content: space-between;
     list-style-type: none;
+    margin: 0 auto;
 
-}
-
-nav{
-
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    margin: 0;
-    
 }

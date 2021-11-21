@@ -9,7 +9,6 @@ export const FILTER_POKEMON_BY_SOURCE = 'FILTER_POKEMON_BY_SOURCE';
 export const SORT_POKEMONS            = 'SORT_POKEMONS';
 export const GET_POKEMON_BY_NAME      = 'GET_POKEMON_BY_NAME';
 
-
 export function getPokemons () {
 
     return async function (dispatch) {
@@ -57,7 +56,7 @@ export const sortPokemons = ( payload ) => {
 };
 
 export const getPokemonDetail = ( id ) => {
-        
+
     return async (dispatch) => {
         const pokemon = await axios.get( `${ constants.POKEMONS_URL }/id/${ id }` );
         return dispatch({
@@ -68,6 +67,7 @@ export const getPokemonDetail = ( id ) => {
 };
 
 export const getPokemonName = (name) => {
+
     return async (dispatch) => {
         try {
             const pokemonName = await axios(`http://localhost:3001/pokemons?name=${name}`);
@@ -76,9 +76,9 @@ export const getPokemonName = (name) => {
             return dispatch({
                 type: GET_POKEMON_BY_NAME,
                 payload: pokeArray
-            })
+            });
         } catch (error) {
             console.log(error)
-        }
-    }
-}
+        };
+    };
+};

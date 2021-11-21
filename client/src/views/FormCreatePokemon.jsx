@@ -24,24 +24,23 @@ const FormCreatePokemon = () => {
         types: [],
     });
 
-    // console.log(types)
 
     function submitForm(e){
         e.preventDefault()
-            if (!input.name) alert('Title is required');
-            else if(!input.img) alert('img is required');
-            else if(!input.life) alert('life is required');
-            else if(!input.attack) alert('attack is required')
-            else if(!input.defense) alert('defense is required')
-            else if(!input.speed) alert('speed is required')
-            else if(!input.height) alert('height is required')
-            else if(!input.weight) alert('weight is required')
-            else if(!input.types) alert('types is required')
+            if (!input.name) alert('Name your Pokemon!');
+            // else if(!input.img) alert('A URL image is required');
+            else if(!input.life) alert('life value is required');
+            else if(!input.attack) alert('attack value is required')
+            else if(!input.defense) alert('defense value is required')
+            else if(!input.speed) alert('speed value is required')
+            else if(!input.height) alert('height value is required')
+            else if(!input.weight) alert('weight value is required')
+            else if(!input.types) alert('type value is required')
             else {
                 axios.post(`${ constants.POKEMONS_URL }`, input)
-                stateReset();
                 dispatch( getPokemons() );
-                alert('Pokemon Creado!');
+                alert('Pokemon Created!');
+                stateReset();
             };
     };
 
@@ -59,7 +58,6 @@ const FormCreatePokemon = () => {
         });
     };
 
-    // agregar poke 
     const handleChange = (e) => {
         setInput({
             ...input,
@@ -75,9 +73,7 @@ const FormCreatePokemon = () => {
             types: [...input.types, e.target.value]
         })
     };
-  
 
-    
 return (
     <>
         <header><NavBar/></header>
@@ -92,47 +88,56 @@ return (
                 </p>
 
                 <p>
-                <label>Imagen: </label>
-                <input type="text" value= { input.img } name="img" placeholder="Enter img" onChange={ handleChange }/>
+                <label>Image: </label>
+                <input type="text" value= { input.img } name="img" placeholder="Enter a url image" onChange={ handleChange }/>
                 </p>
                 
                 <p>
                 <label>Life </label>
                 <input type="range" min="0" max="100" value= { input.life } id="life" name="life" placeholder="Enter life" onChange={ handleChange }/>
-                <output type="range" for="life">{ input.life }</output>
+                <output type="range" htmlFor="life">{ input.life }</output>
                 </p>
                 
                 <p>
                 <label>Attack </label>
                 <input type="range" min="0" max="100" value= { input.attack } id="attack" name="attack" placeholder="Enter attack" onChange={ handleChange }/>
-                <output type="range" for="attack">{ input.attack }</output>
+                <output type="range" htmlFor="attack">{ input.attack }</output>
                 </p>
                 
                 <p>
                 <label>Defense </label>
                 <input type="range" min="0" max="100" value= { input.defense } id="defense" name="defense" placeholder="Enter defense" onChange={ handleChange }/>
-                <output type="range" for="defense">{ input.defense }</output>
+                <output type="range" htmlFor="defense">{ input.defense }</output>
                 </p>
                 
                 <p>
                 <label>Speed </label>
                 <input type="range" min="0" max="100" value= { input.speed } id="speed" name="speed" placeholder="Enter speed" onChange={ handleChange }/>
-                <output type="range" for="speed">{ input.speed }</output>
+                <output type="range" htmlFor="speed">{ input.speed }</output>
                 </p>
                 
                 <p>
                 <label>Height </label>
                 <input type="range" min="0" max="100" value= { input.height } id="height" name="height" placeholder="Enter height" onChange={ handleChange }/>
-                <output type="range" for="height">{ input.height }</output>
+                <output type="range" htmlFor="height">{ input.height }</output>
                 </p>
                 
                 <p>
                 <label>Weight </label>
                 <input type="range" min="0" max="100" value= { input.weight } id="weight" name="weight" placeholder="Enter weight" onChange={ handleChange }/>
-                <output type="range" for="weight">{ input.weight }</output>
+                <output type="range" htmlFor="weight">{ input.weight }</output>
                 </p>
                 
-                <p> Type: {` `} 
+                <p> Types: {` `} 
+                    <select name="type" onChange={handleSelection}>
+                        <option defaultValue disabled >select type</option>
+                        {
+                            types?.map(type => (
+                                <option key={type.id} value={type.id} >{type.name}</option>
+                                ))
+                            }
+                    </select>
+                    {` `}
                     <select name="type" onChange={handleSelection}>
                         <option defaultValue disabled >select type</option>
                         {

@@ -9,7 +9,7 @@ export default function LandingPage() {
             <div className="centerStack">
                 <h1 className="titleMain"> </h1>
                 <Link to='/home'>
-                    <button className="btn">Ingresar</button>
+                    <button className="btn">Come in!</button>
                 </Link>
             </div>
         </div>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch,  } from 'react-redux';
-import { getPokemonName } from '../../redux/actions';
+import { getPokemonName, getPokemons } from '../../redux/actions';
 
 import './NavBar.css';
+// import { useEffect } from 'react';
 
 export default function SearchBar( ) {
 
@@ -11,7 +12,9 @@ export default function SearchBar( ) {
     const [inputValue, setInputValue] = useState("");
 
     const handleInputChange = (e)=>{
+        e.preventDefault();
         setInputValue(e.target.value);
+        console.log(e.target.value);
     };
     const handleClick = (e) =>{
         e.preventDefault();
@@ -19,16 +22,22 @@ export default function SearchBar( ) {
         setInputValue("");
     };
 
+    const handleClickReset = () =>{
+        dispatch( getPokemons());
+    };
+
+
     return (
         <div className="navbar">
-            <Link to="/Home" className="btn">Pokemon App</Link>
+            <Link to="/" className="btn">Main</Link>
+            <Link to="/home" onClick={ handleClickReset } className="btn">Home</Link>
             <form>
                 <input
                     type="text"
-                    placeholder="Search"
+                    placeholder="Look for your Pokemon.."
                     value={inputValue}
                     onChange={ e => handleInputChange(e) } />
-                <button type="submit" onClick={ handleClick }>Search</button>
+                <button className="searchbtn" type="submit" onClick={ (e) => handleClick(e) }>Search</button>
             </form>
             <Link to="/pokemoncreate" className="btn">Create a Pokemon</Link>
         </div>
