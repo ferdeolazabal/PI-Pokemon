@@ -14,7 +14,7 @@ const FormCreatePokemon = () => {
 
     const [ input, setInput ] = useState({
         name: '',
-        img: '',
+        // img: '',
         life: '',
         attack: '',
         defense: '',
@@ -35,7 +35,7 @@ const FormCreatePokemon = () => {
             else if(!input.speed) alert('speed value is required')
             else if(!input.height) alert('height value is required')
             else if(!input.weight) alert('weight value is required')
-            else if(!input.types) alert('type value is required')
+            // else if(!input.types) alert('type value is required')
             else {
                 axios.post(`${ constants.POKEMONS_URL }`, input)
                 dispatch( getPokemons() );
@@ -47,7 +47,7 @@ const FormCreatePokemon = () => {
     function stateReset(){
         setInput({
             name: '',
-            img: '',
+            // img: '',
             life: '',
             attack: '',
             defense: '',
@@ -89,7 +89,7 @@ return (
 
                 <p>
                 <label>Image: </label>
-                <input type="text" value= { input.img } name="img" placeholder="Enter a url image" onChange={ handleChange }/>
+                <input type="url" value= { input.img } name="img" placeholder="Enter a url image" onChange={ handleChange }/>
                 </p>
                 
                 <p>
@@ -137,7 +137,7 @@ return (
                                 ))
                             }
                     </select>
-                    {` `}
+                    {/* {` `}
                     <select name="type" onChange={handleSelection}>
                         <option defaultValue disabled >select type</option>
                         {
@@ -145,7 +145,7 @@ return (
                                 <option key={type.id} value={type.id} >{type.name}</option>
                                 ))
                             }
-                    </select>
+                    </select> */}
                 </p>
                 
                 <button type="submit">Submit</button>

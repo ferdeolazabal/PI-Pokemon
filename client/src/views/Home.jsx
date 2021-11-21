@@ -10,17 +10,19 @@ import './home.css'
 export default function Home () {
 
 const pokemons = useSelector(state => state.pokemons);
-// const pokeSearch = useSelector(state => state.pokesearch);
-// const allPokemons = useSelector(state => state.allPokemons);
-
 
 const [ currentPage, setCurrentPage ] = useState(1);
-const [ pokemonsPerPage ,  ] = useState(9);
-const indexOfLastRecipe = currentPage * pokemonsPerPage;
-const indexOfFirstRecipe = indexOfLastRecipe - pokemonsPerPage;
-const currentPokemons = pokemons.slice(indexOfFirstRecipe, indexOfLastRecipe);
+const pokemonsPerPage = 9;
+const setPokemonsPerPage = 12
+
+const indexOfLastPoke = currentPage === 1 ? 
+                        pokemonsPerPage * currentPage : 
+                        setPokemonsPerPage * currentPage;
+const indexOfFirstPoke = currentPage === 1 ?
+                            indexOfLastPoke - pokemonsPerPage :
+                            indexOfLastPoke - setPokemonsPerPage; 
+const currentPokemons = pokemons.slice(indexOfFirstPoke, indexOfLastPoke);
 const paginate = pageNumber => setCurrentPage(pageNumber); 
-console.log("current pokemons",currentPokemons)
 
     return (
         <>
@@ -33,7 +35,6 @@ console.log("current pokemons",currentPokemons)
                             allPokemons={ pokemons.length }
                             paginate={ paginate } />
                 </div>
-                {/* <div><Cards pokemons={ pokeSearch.length === 0 ? currentPokemons : pokeSearch }/></div> */}
                 <div><Cards pokemons={ currentPokemons }/></div>
                 <div className="paginate">
                     <Paginate pokemonsPerPage={ pokemonsPerPage }
@@ -44,7 +45,6 @@ console.log("current pokemons",currentPokemons)
             :
             <div className="loading" >
                 <NavBar />
-                {/* <FilterSorts /> */}
                 <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." width="1000" height="700"/>
             </div>
             } 

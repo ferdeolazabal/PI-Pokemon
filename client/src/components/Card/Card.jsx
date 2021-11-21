@@ -12,7 +12,10 @@ export default function Card ( { id, name, img, types } ) {
         <h1 className="name">{ name }
         <span>
             <h4 className="h3">type:</h4>
-            { types?.map((name, id)=><h3 className="h3" key={id}>{name}</h3>)}</span>
+                { types?.map((name, id)=>
+                <h3 className="h3" key={id}>{name}</h3>
+                )}
+        </span>
         </h1>
     </div>
     )

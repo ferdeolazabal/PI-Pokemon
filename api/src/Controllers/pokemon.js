@@ -42,7 +42,6 @@ const getDbInfo = async () => {
         const pokemons = await Pokemon.findAll({
             include: { model: Type },
         });
-        // console.log('lista pokemons desde DB' ,pokemons)
         pokemons.forEach(poke => {
             const pokeInfo = {
                 id: poke.id,
@@ -85,23 +84,8 @@ const getPokeByName = async (name) => {
             where: { name },
             include: { model: Type }
         })
-        // console.log('name DB bulk',searchPokeNameDB)
         if (searchPokeNameDB) {
             return searchPokeNameDB;
-        //     let pokedbName = {
-        //         id: searchPokeNameDB.dataValues.id,
-        //         name: searchPokeNameDB.dataValues.name,
-        //         life: searchPokeNameDB.dataValues.life,
-        //         attack: searchPokeNameDB.dataValues.attack,
-        //         defense: searchPokeNameDB.dataValues.defense,
-        //         speed: searchPokeNameDB.dataValues.speed,
-        //         height: searchPokeNameDB.dataValues.height,
-        //         weight: searchPokeNameDB.dataValues.weight,
-        //         img: searchPokeNameDB.dataValues.sprite,
-        //         types: searchPokeNameDB.dataValues.types.map(type => type.type.name)
-        //     }
-        //     console.log('name DB map',pokedbName)
-        //     return pokedbName;
         }else {
             const searchPokeapiName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
             const foundPokeapiName = objPokeApi(searchPokeapiName.data);
