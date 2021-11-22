@@ -22,6 +22,8 @@ const FormCreatePokemon = () => {
         height: '',
         weight: '',
         types: [],
+        // type1: '',
+        // type2: '',
     });
 
 
@@ -55,14 +57,13 @@ const FormCreatePokemon = () => {
             height: '',
             weight: '',
             types: [],
+            // type1: '',
+            // type2: '',
         });
     };
 
     const handleChange = (e) => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
+        setInput((prev) =>({ ...prev, [e.target.name]: e.target.value }) )
     };
 
     const handleSelection = (e) => {
@@ -70,7 +71,7 @@ const FormCreatePokemon = () => {
         e.preventDefault()
         setInput({
             ...input,
-            types: [...input.types, e.target.value]
+            types: [e.target.value]
         })
     };
 
