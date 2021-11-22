@@ -22,7 +22,7 @@ const { conn, Type } = require('./src/db.js');
 const { infoTypeApy } = require('./src/Controllers/type') 
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     
     try{

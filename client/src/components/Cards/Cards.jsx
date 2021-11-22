@@ -4,6 +4,7 @@ import './Cards.css'
 
 export default function Cards ({ pokemons }) {
 
+    console.log('pokemons en cards', pokemons)
     return (
         <div className={ pokemons.length < 2 ? "onecard" : "cards" }>
             {

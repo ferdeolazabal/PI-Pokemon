@@ -4,7 +4,7 @@ const { Pokemon, Type } = require('../db')
 // Lista Pokemons desde api
 const getPokeList = async () => {
     
-    const ttlPoke = 40;
+    const ttlPoke = 20;
     
     try {
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${ ttlPoke }`); // obj con name, url

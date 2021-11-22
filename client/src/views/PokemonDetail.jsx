@@ -38,29 +38,33 @@ const PokemonDetail = () => {
                     <div className="stats">
                         <section>
                             <p>
-                                <span>{`Height: ${ height / 10 } Mt || `}</span>
-                                <span>{`Weight: ${ weight / 10 } Kg`}</span>
+                                <><b>Height: </b>{ height / 10 } Mt || </>
+                                <><b>Weight: </b>{ weight / 10 } Kg</>
                             </p>
                         </section>
                         <section>
+                            <>
                             <p>
-                            <>
-                                <span>{ `Life: ${ life } `}</span>
+                                <b>Life: </b>
                                 <progress value={ life } max="100" />
-                            </>
-                            <>
-                                <span>{ `Attack: ${ attack } `}</span>
-                                <progress value={ attack } max="100" />
-                            </>
-                            <>
-                                <span>{ `Defense: ${ defense } `}</span>
-                                <progress value={ defense } max="100" />
-                            </>
-                            <>
-                                <span>{ `Speed: ${ speed } `}</span>
-                                <progress value={ speed } max="100" />
-                            </>
+                                <>{ life }</>
                             </p>
+                            <p>
+                                <b>Attack: </b>
+                                <progress value={ attack } max="100" />
+                                <span>{ attack }</span>
+                            </p>
+                            <p>
+                                <b>Defense:  </b>
+                                <progress value={ defense } max="100" />
+                                <span>{ defense }</span>
+                            </p>
+                            <>
+                                <b> Speed: </b>
+                                <progress value={ speed } max="100" />
+                                <span>{ speed }</span>
+                            </>
+                            </>
                         </section>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import './formCreatePokemon.css'
 const FormCreatePokemon = () => {
 
     const types = useSelector(state => state.types)
+    console.log('types en form',types)
     const dispatch = useDispatch()
 
     const [ input, setInput ] = useState({
@@ -131,9 +132,9 @@ return (
                 
                 <p> Types: {` `} 
                     <select name="type" onChange={handleSelection}>
-                        <option defaultValue disabled >select type</option>
+                        <option >select type</option>
                         {
-                            types?.map(type => (
+                            types && types?.map(type => (
                                 <option key={type.id} value={type.id} >{type.name}</option>
                                 ))
                             }
