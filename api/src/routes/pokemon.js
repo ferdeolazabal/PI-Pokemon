@@ -59,7 +59,6 @@ router.get('/pokemons/id/:id', async (req, res, next) => {
         } else {
 
             const response = await getPokeById(id);
-            console.log('porkemon por id por api',response);
             res.json(response);
             
         };
