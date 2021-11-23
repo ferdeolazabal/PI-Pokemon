@@ -2,15 +2,15 @@ const axios = require('axios');
 const { Pokemon, Type } = require('../db')
 
 // Lista Pokemons desde api
-const getPokeList = async () => {
+const getApiPokeList = async () => {
     
-    const ttlPoke = 20;
+    const totalPokemons = 20;
     
     try {
-        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${ ttlPoke }`); // obj con name, url
+        const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${ totalPokemons }`);
         const resApiResults  = await apiUrl.data.results.map(obj => axios.get(obj.url));
-        const infoUrlPoke = await axios.all(resApiResults); // proms resuelta
-        const fullDataPokemons = infoUrlPoke.map(obj => obj.data);
+        const infoUrlUnitPoke = await axios.all(resApiResults);
+        const fullDataPokemons = infoUrlUnitPoke.map(obj => obj.data);
         const infoPokemons = fullDataPokemons.map(poke => {
             return {
                 id: poke.id,
@@ -69,7 +69,7 @@ const getDbInfo = async () => {
 // lista Pokemons desde API y DB
 const getAllPokemons = async () => {
 
-    const apiInfo = await getPokeList();
+    const apiInfo = await getApiPokeList();
     const dbInfo = await getDbInfo();
     const totalPokemons = [ ...apiInfo, ...dbInfo ];
 
@@ -112,7 +112,7 @@ const getPokeById = async (id) => {
         return err
     };
 };
-
+// template de objeto pokemon
 const objPokeApi = (poke) => {
     const objPokeapi =
     {
@@ -131,7 +131,7 @@ const objPokeApi = (poke) => {
 };
 
 module.exports = {
-    getPokeList,
+    getApiPokeList,
     getPokeById, 
     getDbInfo,
     getAllPokemons,

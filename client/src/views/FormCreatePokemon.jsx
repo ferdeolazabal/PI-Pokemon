@@ -10,7 +10,6 @@ import './formCreatePokemon.css'
 const FormCreatePokemon = () => {
 
     const types = useSelector(state => state.types)
-    // console.log('types en form',types)
     const dispatch = useDispatch()
 
     const [ input, setInput ] = useState({
@@ -23,15 +22,13 @@ const FormCreatePokemon = () => {
         height: '',
         weight: '',
         types: [],
-        // type1: '',
-        // type2: '',
+
     });
 
 
     function submitForm(e){
         e.preventDefault()
             if (!input.name) alert('Name your Pokemon!');
-            // else if(!input.img) alert('A URL image is required');
             else if(!input.life) alert('life value is required');
             else if(!input.attack) alert('attack value is required')
             else if(!input.defense) alert('defense value is required')
@@ -73,8 +70,6 @@ const FormCreatePokemon = () => {
         e.preventDefault()
         let typesId = e.target.value
         typesId = Number(typesId)
-        // console.log('types id', typesId)
-        // console.log('types id type', typeof(typesId))
 
         setInput(() =>({ 
             ...input, 
@@ -117,7 +112,6 @@ return (
                     min="0" max="100"
                     value= { input.life }
                     name="life" id="life"
-                    // placeholder="Enter life"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="life">{ input.life }</output>
                 </p>
@@ -128,7 +122,6 @@ return (
                     min="0" max="100"
                     value= { input.attack }
                     name="attack" id="attack"
-                    // placeholder="Enter attack"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="attack">{ input.attack }</output>
                 </p>
@@ -139,7 +132,6 @@ return (
                     min="0" max="100"
                     value= { input.defense }
                     id="defense" name="defense"
-                    // placeholder="Enter defense"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="defense">{ input.defense }</output>
                 </p>
@@ -150,7 +142,6 @@ return (
                     min="0" max="100"
                     value= { input.speed }
                     id="speed" name="speed"
-                    // placeholder="Enter speed"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="speed">{ input.speed }</output>
                 </p>
@@ -161,7 +152,6 @@ return (
                     min="0" max="100"
                     value= { input.height }
                     id="height" name="height"
-                    // placeholder="Enter height"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="height">{ input.height }</output>
                 </p>
@@ -172,7 +162,6 @@ return (
                     min="0" max="100"
                     value= { input.weight }
                     id="weight" name="weight"
-                    // placeholder="Enter weight"
                     onChange={ handleChange }/>
                 <output type="range" htmlFor="weight">{ input.weight }</output>
                 </p>
@@ -183,28 +172,16 @@ return (
                             types && types?.map(type => (
                                 <option key={type.id} value={type.id} >{type.name}</option>
                                 ))
-                            }
+                        }
                     </select>
-                    {/* {` `}
-                    <select name="type" onChange={handleSelection}>
-                        <option defaultValue disabled >select type</option>
-                        {
-                            types?.map(type => (
-                                <option key={type.id} value={type.id} >{type.name}</option>
-                                ))
-                            }
-                    </select> */}
                 </p>
-                
                 <button type="submit">Submit</button>
             </>
         </div>
         </form>
         </div>
     </>
-)
-}
-
-
+    )
+};
 
 export default FormCreatePokemon;

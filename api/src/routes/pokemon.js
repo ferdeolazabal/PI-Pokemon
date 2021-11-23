@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getPokeById, getAllPokemons, getPokeByName, getDbInfo, getPokeList } = require('../Controllers/pokemon')
+const { getPokeById, getAllPokemons, getPokeByName } = require('../Controllers/pokemon')
 const { Pokemon, Type } = require('../db')
 
 // [ ] GET /pokemons: OK
@@ -41,7 +41,6 @@ router.get('/pokemons/id/:id', async (req, res, next) => {
         if ( isNaN(id) ) {
 
             const pokemon = await Pokemon.findByPk( id, { include: Type } ); 
-            // console.log( 'pokemon x id por db',pokemon );
             let pokeDbId = {
                 id: pokemon.id,
                 name: pokemon.name,
@@ -54,15 +53,15 @@ router.get('/pokemons/id/:id', async (req, res, next) => {
                 img: pokemon.img,
                 types: pokemon.dataValues.types.map(type => type.name)
             };
-            // console.log(pokeDbId);
 
             res.json(pokeDbId ? pokeDbId : 'No pokemon with that ID');
         
         } else {
-            // busqueda en API
+
             const response = await getPokeById(id);
             console.log('porkemon por id por api',response);
             res.json(response);
+            
         };
     } catch (error) {
         next(error);
