@@ -30,12 +30,17 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
             <div className='container'>
                 <NavBar />
                 <FilterSorts />
+
                 <div className="paginate">
                     <Paginate pokemonsPerPage={ pokemonsPerPage }
                             allPokemons={ pokemons.length }
                             paginate={ paginate } />
                 </div>
-                <div><Cards pokemons={ currentPokemons }/></div>
+                
+                <div>
+                    <Cards pokemons={ currentPokemons }/>
+                </div>
+                
                 <div className="paginate">
                     <Paginate pokemonsPerPage={ pokemonsPerPage }
                             allPokemons={ pokemons.length }
@@ -45,7 +50,9 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
             :
             <div className="loading" >
                 <NavBar />
-                <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' alt="loading..." width="1000" height="700"/>
+                <img src= 'https://c.tenor.com/e6J4X97EZkIAAAAi/ash-now.gif' 
+                    alt="loading..." width="1000" height="700"
+                />
             </div>
             } 
         </>

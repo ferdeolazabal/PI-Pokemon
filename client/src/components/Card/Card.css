@@ -4,16 +4,16 @@
     box-shadow: 0px 0px 20px 0px rgba(255, 255, 0, 0.897);;
     background-color: rgba(51, 51, 51, 0.808);
     display: flex;
-	/* flex-direction: row; */
     justify-content: center;
     align-items: center;
-    padding: 2%;
+    padding: 3%;
     max-height: 30vh;
     max-width: 30vw;
 
 } 
 
-.link {
+.card_link {
+
     text-decoration: none;
     cursor: pointer;
     display: flex;
@@ -26,29 +26,59 @@
 
 }
 
-.name{
+.card_name{
+
     color: black;
     font-size: 1.6rem;
     font-weight: bold;
-    margin-bottom: 0;
-    margin-top: 5px;
-}
-
-.types{
-    color: black;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 0;
-    /* margin-top: 5px; */
-
-    /* margin-bottom: 1; */
+    display: flex;
+    flex-direction: column;
     margin: 0;
 }
 
-.h3{
+.types{
+
+    color: black;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+
+}
+
+.type_title{
+
     color: black;
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 0;
     margin-top: 0;
+    display:flex;
+    flex-direction: column;
+    word-break: initial;
+    white-space: initial !important;
+
+}
+
+.cardtype{
+    color: black;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin: 0px;
+    padding: 0px;
+    word-break: initial;
+    text-decoration: none;
+
+}
+.type_list_card{
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    
 }

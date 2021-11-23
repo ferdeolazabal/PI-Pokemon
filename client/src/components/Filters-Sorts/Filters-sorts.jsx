@@ -16,10 +16,11 @@ export default function FilterSorts () {
         e.preventDefault();
         dispatch( getFilterType( e.target.value ) )
     };
+
     function handleSortPokes(e){
         e.preventDefault();
         dispatch( sortPokemons( e.target.value ) )
-    }
+    };
 
     return (
         <div className="filters">
@@ -37,21 +38,21 @@ export default function FilterSorts () {
                 <option value="flying">Flying</option>
                 <option value="poison">Poison</option>
                 <option value="ground">Ground</option>
-                {/* <option value="rock">Rock</option> */}
+                <option value="rock">Rock</option>
                 <option value="bug">Bug</option>
-                {/* <option value="ghost">Ghost</option> */}
-                {/* <option value="steel">Steel</option> */}
+                <option value="ghost">Ghost</option>
+                <option value="steel">Steel</option>
                 <option value="fire">Fire</option>
                 <option value="water">Water</option>
                 <option value="grass">Grass</option>
                 <option value="electric">Electric</option>
-                {/* <option value="psychic">Psychic</option> */}
-                {/* <option value="ice">Ice</option> */}
-                {/* <option value="dragon">Dragon</option> */}
-                {/* <option value="dark">Dark</option> */}
+                <option value="psychic">Psychic</option>
+                <option value="ice">Ice</option>
+                <option value="dragon">Dragon</option>
+                <option value="dark">Dark</option>
                 <option value="fairy">Fairy</option>
-                {/* <option value="unknown">Unknown</option> */}
-                {/* <option value="shadow">Shadow</option> */}
+                <option value="unknown">Unknown</option>
+                <option value="shadow">Shadow</option>
             </select>
             <select className="btn" onChange={ e => handleSortPokes(e) }>
                 <option value="">Sort by:</option>

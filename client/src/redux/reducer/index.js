@@ -38,12 +38,16 @@ function rootReducer( state = initialState, { type, payload } ) {
                                     : payload === 'api' ? api : pokemonsSource,
                 };
         case FILTER_POKEMON_BY_TYPE:
-            const totalPokemons = state.allPokemons;
+
+            const totalPokemons  = state.allPokemons;
             const pokemonsByType = totalPokemons.filter(p => p.types);
-            const pokemonsByTypeFiltered = pokemonsByType.filter(p => p.types.includes(payload));
+            const byTypeFiltered = pokemonsByType.filter(p => p.types.includes(payload));
+            const filterValidate  = byTypeFiltered.length === 0 
+                                    ? [ { name:'Type not Found' } ] 
+                                    : byTypeFiltered
                 return {
                     ...state,
-                    pokemons:payload === 'all' ? totalPokemons : pokemonsByTypeFiltered,
+                    pokemons : payload === 'all' ? totalPokemons : filterValidate,
                 };
         case SORT_POKEMONS:
             const pokemons = state.allPokemons;

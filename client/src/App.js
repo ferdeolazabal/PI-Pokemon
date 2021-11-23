@@ -28,11 +28,12 @@ function App() {
           <Route exact path="/" component={ Main } />
           <Route path="/home" component={ Home } />
           <Route path="/pokemoncreate" component={ FormCreatePokemon } />
+          {/* <Route path="/pokemons?name=/:name" component={ SearchPoke } /> */}
           <Route path="/pokemons/id/:id" component={ PokemonDetail } />
         </Switch>
       </div>
     </Router>
   );
-}
+};
 
 export default App;

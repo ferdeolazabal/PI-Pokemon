@@ -13,13 +13,18 @@ export default function Paginate( { pokemonsPerPage, allPokemons, paginate } ) {
     return (
         <>
             <ul className="pagination">
-                { pageNumbers?.map( number => (
-                    <li key={ number } className="page-item">
-                        <button className="btn" onClick={ () => paginate( number ) }>
+                { pageNumbers && pageNumbers?.map( number => (
+                    <li 
+                        className="page-item"
+                        key={ number } >
+
+                        <button 
+                            className="btn"
+                            onClick={ () => paginate( number ) }>
                             { number }
                         </button>
-                    </li>
-                ) ) }
+                    </li> ) ) 
+                }
             </ul>
         </>
     );
