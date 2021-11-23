@@ -10,11 +10,13 @@ export default function Card ( pokemon ) {
     <div className="card">
         
         <Link to={`/pokemons/id/${pokemon.id}`} className="link">
-            <img className="img" src={ pokemon.img } alt={ pokemon.name } />
+            <img
+                className="img"
+                src={ `${pokemon.img? pokemon.img : '' } `} alt={ '' } />
         </Link>
 
         <h1 className="card_name">{ pokemon.name }
-            <p className="type_title">type:</p>
+            <p className="type_title"> { `${pokemon.type? 'type:' : '' }` }</p>
                 <>{
                     pokemon.types && pokemon.types[0].PokemonType ?
                         pokemon.types.map((name,id) => 
