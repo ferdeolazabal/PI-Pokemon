@@ -53,7 +53,6 @@ const FormCreatePokemon = () => {
             speed: '',
             height: '',
             weight: '',
-            img: '',
             types: [],
         });
     };
@@ -74,7 +73,7 @@ const FormCreatePokemon = () => {
         setInput(() =>({ 
             ...input, 
             types: Array.from( new Set ([ ...input.types, typesId ]) ) // ok
-            // types: [...input.types, typesId] ok
+            // types: [...input.types, typesId] 
             })
         );
     };

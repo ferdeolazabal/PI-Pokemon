@@ -11,7 +11,7 @@ import PokemonDetail from './views/PokemonDetail.jsx';
 import './App.css';
 
 
-function App() {
+export default function App() {
 
   const dispatch = useDispatch();
 
@@ -36,4 +36,3 @@ function App() {
   );
 };
 
-export default App;
