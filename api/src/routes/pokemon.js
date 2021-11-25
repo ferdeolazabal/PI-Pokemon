@@ -63,7 +63,8 @@ router.get('/pokemons/id/:id', async (req, res, next) => {
             
         };
     } catch (error) {
-        next(error);
+        // next(error);
+        res.status(404).send('no pokemons with that ID !')
     };
 
 });
