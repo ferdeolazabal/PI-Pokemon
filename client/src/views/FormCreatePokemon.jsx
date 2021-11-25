@@ -1,7 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPokemons } from '../redux/actions'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+
+// import { useDispatch } from 'react-redux'
+// import { getPokemons } from '../redux/actions'
+
 import NavBar from '../components/NavBar/NavBar.jsx'
 import constants from '../constants'
 import './formCreatePokemon.css'
@@ -10,7 +14,12 @@ import './formCreatePokemon.css'
 const FormCreatePokemon = () => {
 
     const types = useSelector(state => state.types)
-    const dispatch = useDispatch()
+    console.log('types', types)
+    console.log('types filter name', types.filter(type => type.name))
+
+    console.log('types.id', types.id)
+    console.log('types.name', types.name)
+    // const dispatch = useDispatch()
 
     const [ input, setInput ] = useState({
         name: '',
@@ -38,7 +47,7 @@ const FormCreatePokemon = () => {
             else if(!input.types) alert('type value is required')
             else {
                 axios.post(`${ constants.POKEMONS_URL }`, input)
-                dispatch( getPokemons() );
+                // dispatch( getPokemons() );
                 alert('Pokemon Created!');
                 stateReset();
             };
@@ -64,7 +73,6 @@ const FormCreatePokemon = () => {
         });
     };
 
-
     const handleSelection = (e) => {
         e.preventDefault()
         let typesId = e.target.value
@@ -72,20 +80,40 @@ const FormCreatePokemon = () => {
 
         setInput(() =>({ 
             ...input, 
-            types: Array.from( new Set ([ ...input.types, typesId ]) ) // ok
-            // types: [...input.types, typesId] 
+            // types: Array.from( new Set ([ ...input.types, typesId ]) ) // ok
+            types: [...input.types, typesId] 
             })
         );
     };
 
+    const filterTypes = (id) => {
+        let filteredTypes = input.types.filter(
+        ( type ) => type !== id,
+        );
+        
+        setInput({
+            ...input,
+            types: filteredTypes,
+        });
+    };
+
+    const [ submitButton, setSubmitButton ] = useState(true);
+
+    useEffect(() => {
+        input.name && input.types.length > 0
+            ? setSubmitButton( false )
+            : setSubmitButton( true );
+        }, [ input.name, input.types.length ]);
+
+
 return (
-    <>
+    <div className="cont_img_back">
         <header><NavBar/></header>
+
+        <h1 className="Title_create">Create your Pokemon !</h1>
         <div className="pageCreatePokemon">
-            <h1 className="nav">Create your Pokemon !</h1>
         <form className="containerCreate" onSubmit={ submitForm }>
             <div className="form-group">
-            <>
                 <p>
                 <label>Name: </label>
                 <input
@@ -174,12 +202,54 @@ return (
                         }
                     </select>
                 </p>
-                <button type="submit">Submit</button>
-            </>
-        </div>
+                <button className="submit_btn"
+                        disabled={submitButton}
+                        type="submit">
+                        Catch it !
+                </button>
+            </div>
         </form>
+        { ( input.name || input.types.length > 0 ) && ( 
+        <div className="containerPreviewCreate">
+            <h2>Name: {input.name}</h2>
+            <img
+                src={input.img}
+                alt="select a pokemon image"
+                style={{ width: '50%' }}
+            />
+            <div>
+            <p>
+                Types selected{' '}
+                {/* {input.types.length <= 1 ? (
+                <span>type</span>
+                ) : (
+                <span>types</span>
+                )}
+                : */}
+            </p>
+            <ul>
+                { input.types.map((el) => (
+                <div key={el} className="preview_list">
+                <li>⭐ {el}</li>
+                    <button
+                    className="deleteButton"
+                    onClick={() => filterTypes(el)}
+                    >
+                    x
+                    </button>
+                </div>
+                )) }
+            </ul>
+            {
+                types && types?.map(type => (
+                    <option key={type.id} value={type.id} >{type.id}-{type.name}</option>
+                    ))
+            }
+            </div>
         </div>
-    </>
+        )}
+        </div>
+    </div>
     )
 };
 

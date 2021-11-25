@@ -24,6 +24,9 @@ const indexOfFirstPoke = currentPage === 1 ?
 const currentPokemons = pokemons.slice(indexOfFirstPoke, indexOfLastPoke);
 const paginate = pageNumber => setCurrentPage(pageNumber); 
 
+console.log('home => paginate',paginate)
+
+
     return (
         <>
             { pokemons.length >= 1 ?

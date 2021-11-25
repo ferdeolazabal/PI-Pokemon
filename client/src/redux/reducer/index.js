@@ -88,9 +88,10 @@ function rootReducer( state = initialState, { type, payload } ) {
                     pokemonDetail: payload,
             };
         case GET_POKEMON_BY_NAME:
+            const validateName = payload[0].status === 404 ? [ { name:'Pokemon not Found' } ] : payload;
             return {
                 ...state,
-                pokemons: payload,
+                pokemons: validateName,
             };
         default:
             return state;

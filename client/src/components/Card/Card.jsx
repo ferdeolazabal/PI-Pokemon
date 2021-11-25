@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './Card.css'
 
 export default function Card ( pokemon ) {
 
-console.log('pokemon types en card', pokemon.types)
+// console.log('pokemon types en card', pokemon.types)
 
     return (
     <div className="card">

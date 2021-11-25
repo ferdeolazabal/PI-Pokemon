@@ -24,7 +24,8 @@ router.get('/pokemons', async (req, res, next) => {
             res.json(PokeName);
         };
     } catch (error) {
-        next(error);
+        // next(error);
+        res.status(404).send('no pokemons with that name !')
     };
 });
 
