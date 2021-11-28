@@ -60,6 +60,8 @@ export default function FilterSorts () {
                 <option value="za">Alphabetically: Z to A</option>
                 <option value="hl">Strength: High to Low</option>
                 <option value="lh">Strength: Low to High</option>
+                <option value="spHL">Speed: High to Low</option>
+                <option value="spLH">Speed: Low to High</option>
             </select>
         </div>
     )

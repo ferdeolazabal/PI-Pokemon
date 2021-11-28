@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
-// import { useDispatch } from 'react-redux'
-// import { getPokemons } from '../redux/actions'
+import { useDispatch } from 'react-redux'
+import { getPokemons } from '../redux/actions'
 
 import NavBar from '../components/NavBar/NavBar.jsx'
 import constants from '../constants'
@@ -19,7 +19,7 @@ const FormCreatePokemon = () => {
 
     console.log('types.id', types.id)
     console.log('types.name', types.name)
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const [ input, setInput ] = useState({
         name: '',
@@ -47,7 +47,7 @@ const FormCreatePokemon = () => {
             else if(!input.types) alert('type value is required')
             else {
                 axios.post(`${ constants.POKEMONS_URL }`, input)
-                // dispatch( getPokemons() );
+                dispatch( getPokemons() );
                 alert('Pokemon Created!');
                 stateReset();
             };
@@ -214,7 +214,7 @@ return (
             <h2>Name: {input.name}</h2>
             <img
                 src={input.img}
-                alt="select a pokemon image"
+                alt="select a pokemon img"
                 style={{ width: '50%' }}
             />
             <div>

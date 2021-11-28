@@ -10,7 +10,21 @@
     max-height: 30vh;
     max-width: 30vw;
 
-} 
+}
+/* 
+.card :hover {
+    top: calc( 90% - 10px );
+    border: 1px solid rgba(#F2a4F8, 0);
+    box-shadow: 0 75px 80px rgba(0,0,0,.05), 0 0 5px rgba(0,0,0,.1);
+    cursor: pointer;
+
+    }
+
+.card :active {
+    top: 100%;
+    box-shadow: 70 50px 100px rgba(0,0,10,.05), 0 0 2px rgba(0,0,0,.1);
+    transition: ease-in-out .1s;
+} */
 
 .card_link {
 

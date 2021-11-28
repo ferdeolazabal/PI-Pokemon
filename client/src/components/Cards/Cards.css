@@ -27,5 +27,8 @@
 
     height: 80%;
     width: 75%;
+}
 
+.img:hover{
+    transform: rotateY(180deg);
 }

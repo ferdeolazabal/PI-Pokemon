@@ -107,24 +107,24 @@ const getDbInfo = async () => {
 };
 
 // lista Pokemons desde API y DB
-// const getAllPokemons = async () => {
+const getAllPokemons = async () => {
 
-//     const apiInfo = await getApiPokeList();
-//     const dbInfo = await getDbInfo();
-//     const totalPokemons = [ ...apiInfo, ...dbInfo ];
+    const apiInfo = await getApiPokeList();
+    const dbInfo = await getDbInfo();
+    const totalPokemons = [ ...apiInfo, ...dbInfo ];
 
-//     return totalPokemons;
-// };
-
-const getAllPokemons = () => {
-
-    return getApiPokeList().then(apiInfo => {
-        return getDbInfo().then(dbInfo => {
-            const totalPokemons = [ ...apiInfo, ...dbInfo ];
-            return totalPokemons;
-        });
-    });
+    return totalPokemons;
 };
+
+// const getAllPokemons = () => {
+
+//     return getApiPokeList().then(apiInfo => {
+//         return getDbInfo().then(dbInfo => {
+//             const totalPokemons = [ ...apiInfo, ...dbInfo ];
+//             return totalPokemons;
+//         });
+//     });
+// };
 
 // Lista Pokemons desde API y DB por nombre
 const getPokeByName = async (name) => {

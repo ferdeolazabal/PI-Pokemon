@@ -12,22 +12,38 @@ export const GET_POKEMON_BY_NAME      = 'GET_POKEMON_BY_NAME';
 export function getPokemons () {
 
     return async function (dispatch) {
-        const pokemons = await axios.get( `${ constants.POKEMONS_URL }` );
+    
+        try {
+    
+            const pokemons = await axios.get( `${ constants.POKEMONS_URL }` );
             return dispatch({
                 type: GET_POKEMONS,
                 payload: pokemons.data
                 });
+    
+        } catch (error) {
+            
+            console.log(error);
+        }
     };
 };
 
 export const getTypes = () => {
 
     return async (dispatch) => {
-        const types = await axios.get( `${ constants.TYPES_URL }` )
+    
+    try {
+    
+            const types = await axios.get( `${ constants.TYPES_URL }` )
         return dispatch({
             type: GET_TYPES,
             payload: types.data
         });
+    
+    } catch (error) {
+    
+        console.log(error);
+        };
     };
 };
 

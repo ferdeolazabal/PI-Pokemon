@@ -50,7 +50,7 @@ function rootReducer( state = initialState, { type, payload } ) {
                     pokemons : payload === 'all' ? totalPokemons : filterValidate,
                 };
         case SORT_POKEMONS:
-            const pokemons = state.allPokemons;
+            const pokemons = state.pokemons;
             const pokemonsSortedByNameZA = pokemons.filter(p => p.name).sort((a,b) => {
                 a = a.name.toUpperCase();
                 b = b.name.toUpperCase();
@@ -75,12 +75,25 @@ function rootReducer( state = initialState, { type, payload } ) {
                 if (a.attack < b.attack) return 1;
                 return 0;
             });
+            const pokemonsSortedBySpeedLH = pokemons.filter(p => p.speed).sort((a,b) => {
+                if (a.speed < b.speed) return -1;
+                if (a.speed > b.speed) return 1;
+                return 0;
+            });
+            const pokemonsSortedBySpeedHL = pokemons.filter(p => p.speed).sort((a,b) => {
+                if (a.speed > b.speed) return -1;
+                if (a.speed < b.speed) return 1;
+                return 0;
+            });
+
             return {
                 ...state,
                 pokemons:   payload === 'az' ? pokemonsSortedByNameAZ : 
                             payload === 'za' ? pokemonsSortedByNameZA :
                             payload === 'hl' ? pokemonsSortedByStrengthHL :
-                            payload === 'lh' ? pokemonsSortedByStrengthLH : pokemons,
+                            payload === 'lh' ? pokemonsSortedByStrengthLH :
+                            payload === 'spHL' ? pokemonsSortedBySpeedHL :
+                            payload === 'spLH' ? pokemonsSortedBySpeedLH : pokemons,
             };
         case GET_POKEMONS_DETAIL:
             return {

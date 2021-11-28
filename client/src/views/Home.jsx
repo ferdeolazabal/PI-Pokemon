@@ -24,11 +24,9 @@ const indexOfFirstPoke = currentPage === 1 ?
 const currentPokemons = pokemons.slice(indexOfFirstPoke, indexOfLastPoke);
 const paginate = pageNumber => setCurrentPage(pageNumber); 
 
-console.log('home => paginate',paginate)
-
 
     return (
-        <>
+        <div>
             { pokemons.length >= 1 ?
             <div className='container'>
                 <NavBar />
@@ -58,6 +56,6 @@ console.log('home => paginate',paginate)
                 />
             </div>
             } 
-        </>
+        </div>
     )
 };
