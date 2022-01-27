@@ -16,8 +16,16 @@ router.get('/pokemons', async (req, res, next) => {
         
         if (!name) {
 
-            const response = await getAllPokemons();
-            res.json(response);
+            const pokemons = await Pokemon.findAll({
+                include: [ { model: Type} ]
+            });
+            if (pokemons.length === 0) {
+                const response = await getAllPokemons();
+                res.json(response);
+            } else {
+                res.json(pokemons);
+            }
+
 
         } else {
             const PokeName = await getPokeByName(name);
@@ -36,10 +44,10 @@ router.get('/pokemons', async (req, res, next) => {
 router.get('/pokemons/id/:id', async (req, res, next) => {
 
     const { id } = req.params;
-
+    console.log('id', id);
     try {
         // busqueda en DB
-        if ( isNaN(id) ) {
+        if ( id ) {
 
             const pokemon = await Pokemon.findByPk( id, { include: Type } ); 
             let pokeDbId = {
@@ -54,15 +62,17 @@ router.get('/pokemons/id/:id', async (req, res, next) => {
                 img: pokemon.img,
                 types: pokemon.dataValues.types.map(type => type.name)
             };
-
+            console.log('pokemon',pokemon)
+            console.log('pokeDbId',pokeDbId)
+            // res.json(pokeDbId);
             res.json(pokeDbId ? pokeDbId : 'No pokemon with that ID');
         
         } else {
 
             const response = await getPokeById(id);
             res.json(response);
-            
         };
+        
     } catch (error) {
         // next(error);
         res.status(404).send('no pokemons with that ID !')

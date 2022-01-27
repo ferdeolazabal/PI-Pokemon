@@ -27,17 +27,17 @@ conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     
     try{
-      const typeList= await infoTypeApy();
-      const foundTypesDB = await Type.findAll({
-        attributes: ['name']
-      });
+      // const typeList= await infoTypeApy();
+      // const foundTypesDB = await Type.findAll({
+      //   attributes: ['name']
+      // });
       
-      if(foundTypesDB.length === 0){
-        await Type.bulkCreate(typeList)
-      }
+      // if(foundTypesDB.length === 0){
+      //   await Type.bulkCreate(typeList)
+      // }
 
       // const getApiPokeList = await getApiPokeList();
-      const startLoadPokemons = await Pokemon.findAll( { } );
+      // const startLoadPokemons = await Pokemon.findAll( { } );
 
       // if(startLoadPokemons.length === 0){
       //   console.log('startLoadPokemons.length',startLoadPokemons.length);

@@ -1,10 +1,34 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { getPokemons } from '../../redux/actions'
+
 import './Card.css'
 
 export default function Card ( pokemon ) {
 
-// console.log('pokemon types en card', pokemon.types)
+    const dispatch = useDispatch()
+    // console.log(pokemon.name)
+    const handleEmptyFilter = () => {
+        if(pokemon.name === 'Type not Found'){
+            Swal.fire   ({  
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No hay pokemons con ese tipo, intenta con otro!',
+            })
+            dispatch(getPokemons())
+
+        } else if (pokemon.name === 'Pokemon not Found'){
+            Swal.fire   ({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No hay pokemons con ese nombre, intenta con otro!',
+            })
+            dispatch(getPokemons())
+        };
+            return pokemon.name
+    }
 
     return (
     <div className="card">
@@ -15,7 +39,7 @@ export default function Card ( pokemon ) {
                 src={ `${pokemon.img? pokemon.img : '' } `} alt={ '' } />
         </Link>
 
-        <h1 className="card_name">{ pokemon.name }
+        <h1 className="card_name">{ handleEmptyFilter() }
             <p className="type_title"> { `${pokemon.type? 'type:' : '' }` }</p>
                 <>{
                     pokemon.types ?

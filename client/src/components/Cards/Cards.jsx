@@ -11,12 +11,12 @@ export default function Cards ({ pokemons }) {
                 pokemons?.map(pokemon => 
                     <Card
                         key={pokemon.id}
-                        id={pokemon.id}
                         name={pokemon.name}
                         img={pokemon.img}
-                        types={ pokemons.types && pokemon.types[0].PokemonType ?
-                                pokemon.types.map(type => type.name)  : 
-                                pokemon.types }
+                        // types={ pokemons.types && pokemon.types[0].PokemonType ?
+                        //         pokemon.types.map(type => type.name)  : 
+                        //         pokemon.types }
+                        types={ pokemon.types }
                     />)
             }
         </div>
