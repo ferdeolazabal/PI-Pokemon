@@ -17,7 +17,7 @@
   - Workflow de GIT.
 ## Idea general
 
-El proyecto consistió en crear una aplicación en la cual se puedan ver los distintos Pokemon utilizando la api externa [pokeapi](https://pokeapi.co/) y a partir de ella poder, entre otras cosas:
+El proyecto consistió en crear una aplicación en la cual se pueden ver los distintos Pokemon utilizando la api externa [pokeapi](https://pokeapi.co/) y a partir de ella se puede, entre otras cosas:
 
   - Buscar pokemons
   - Filtrarlos / Ordenarlos
@@ -38,7 +38,7 @@ __Pagina inicial__: Landing page con
 
 __Ruta principal__:
 - [ ] Input de búsqueda para encontrar pokemons por nombre.
-- [ ] Área donde se muestra el listado de pokemons. Al iniciar se cargan los primeros resultados obtenidos desde la ruta `GET /pokemons` y mostrando su:
+- [ ] Área donde se muestra el listado de pokemons. Al iniciar se cargan los primeros resultados obtenidos desde la ruta `GET /pokemons` mostrando su:
   - Imagen
   - Nombre
   - Tipos (Electrico, Fuego, Agua, etc)
