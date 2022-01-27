@@ -84,7 +84,7 @@ const getDbInfo = async () => {
         // console.log(pokemons);
         pokemons.forEach(poke => {
             const pokeInfo = {
-                id: poke.id,
+                // id: poke.id,
                 name: poke.name,
                 life: poke.life,
                 attack: poke.attack,
