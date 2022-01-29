@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import constants from '../../constants';
 
 export const GET_POKEMONS             = 'GET_POKEMONS';
@@ -72,7 +73,10 @@ export const getSource = ( payload ) => {
 
 export const getFilterType = ( payload ) => {
     
+    console.log('type en action',payload);
     return {
+
+
         type: FILTER_POKEMON_BY_TYPE,
         payload
     };
@@ -102,12 +106,20 @@ export const getPokemonName = (name) => {
     return async (dispatch) => {
         try {
             const pokemonName = await axios(`http://localhost:3001/pokemons?name=${name}`);
-            const pokeArray = [];
-            pokeArray.push(pokemonName.data);
-            return dispatch({
-                type: GET_POKEMON_BY_NAME,
-                payload: pokeArray
-            });
+            // console.log(pokemonName.data);
+
+            if (pokemonName.data === 'Pokemon no encontrado') {
+                Swal.fire({
+                    title: 'Pokemon no encontrado',
+                    text: 'Intenta con otro nombre !',
+                    icon: 'warning',
+                })
+            } else {
+                dispatch({
+                    type: GET_POKEMON_BY_NAME,
+                    payload: pokemonName.data
+                });
+            }
         } catch (error) {
             console.log(error)
         };

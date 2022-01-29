@@ -8,6 +8,7 @@ import './Card.css'
 
 export default function Card ( pokemon ) {
     
+    console.log('pokemon en card',pokemon);
     const dispatch = useDispatch()
 
     const handleEmptyFilter = () => {
@@ -41,6 +42,16 @@ export default function Card ( pokemon ) {
 
         <h1 className="card_name">{ handleEmptyFilter() }
             <p className="type_title"> { `${pokemon.type? 'type:' : '' }` }</p>
+
+                <>
+                    {
+                        pokemon.types[0].PokemonType ?
+                        pokemon.types.map(type =>
+                            <p className="type" key={type.id}>{ pokemon.types[0].name }</p>
+                            ) : <></>
+                    }
+                </>
+
                 <>{
                     pokemon.types ?
                     pokemon.types.map((name,id) => 

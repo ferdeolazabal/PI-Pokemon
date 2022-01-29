@@ -163,14 +163,28 @@ const getPokeByName = async (name) => {
         
         const searchPokeNameDB = await Pokemon.findOne({
             where: { name },
-            include: { model: Type }
+            include: { model: Type },
         })
-        if (searchPokeNameDB) {
-            return searchPokeNameDB;
-        }else {
-            const searchPokeapiName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-            const foundPokeapiName = objPokeApi(searchPokeapiName.data);
-            return foundPokeapiName
+
+        if (searchPokeNameDB !== null) {
+
+            const pokeByname = searchPokeNameDB.dataValues;
+            const pokeBynameInfo = {
+                id: pokeByname.id,
+                name: pokeByname.name,
+                img: pokeByname.img,
+                types: pokeByname.types.map(type => type.name),
+            };
+            console.log('searchPokeNameDB', pokeBynameInfo);
+            
+            return pokeBynameInfo;
+        
+        } else {
+            return 'Pokemon no encontrado';
+        // }else {
+        //     const searchPokeapiName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
+        //     const foundPokeapiName = objPokeApi(searchPokeapiName.data);
+        //     return foundPokeapiName
         };
     } catch (error) {
         console.log(error);
