@@ -8,6 +8,7 @@ export const FILTER_POKEMON_BY_TYPE   = 'FILTER_POKEMON_BY_TYPE';
 export const FILTER_POKEMON_BY_SOURCE = 'FILTER_POKEMON_BY_SOURCE';
 export const SORT_POKEMONS            = 'SORT_POKEMONS';
 export const GET_POKEMON_BY_NAME      = 'GET_POKEMON_BY_NAME';
+export const NEW_POKEMON              = 'NEW_POKEMON';
 
 export function getPokemons () {
 
@@ -46,6 +47,20 @@ export const getTypes = () => {
         };
     };
 };
+
+export function newPokemon(data) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post(`${ constants.POKEMONS_URL }`, data);
+            dispatch({
+                type: NEW_POKEMON,
+                payload: response.data,
+            });
+        } catch (error) {
+            console.log(error.response);
+        }
+    };
+}
 
 export const getSource = ( payload ) => {   
 

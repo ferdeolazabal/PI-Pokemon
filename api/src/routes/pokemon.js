@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { getPokeById, getAllPokemons, getPokeByName } = require('../Controllers/pokemon')
 const { Pokemon, Type } = require('../db')
+const {v4: uuidv4} = require('uuid');
+
 
 // [ ] GET /pokemons: OK
 // Obtener un listado de los pokemons desde pokeapi.
@@ -9,32 +11,21 @@ const { Pokemon, Type } = require('../db')
 // Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
 // Si no existe ningún pokemon mostrar un mensaje adecuado
 router.get('/pokemons', async (req, res, next) => {
-    
+
+    const { name } = req.query;
     try {
-
-        const { name } = req.query;
-        
         if (!name) {
-
-            const pokemons = await Pokemon.findAll({
-                include: [ { model: Type} ]
-            });
-            if (pokemons.length === 0) {
-                const response = await getAllPokemons();
-                res.json(response);
-            } else {
-                res.json(pokemons);
-            }
-
-
-        } else {
-            const PokeName = await getPokeByName(name);
-            res.json(PokeName);
-        };
+            const allPokemons = await getAllPokemons();
+            // console.log('allPokemons', allPokemons);
+            res.status(200).json(allPokemons);
+        }
+        else {
+            const pokeByName = await getPokeByName(name);
+            res.status(200).json(pokeByName);
+        }
     } catch (error) {
-        // next(error);
-        res.status(404).send('no pokemons with that name !')
-    };
+        next(error);
+    }
 });
 
 // [ ] GET /pokemons/{idPokemon}: OK
@@ -87,9 +78,14 @@ router.post('/pokemons', async (req, res, next) => {
 
     const { name, img, life, attack, defense, speed, height, weight, types  } = req.body;
 
+
+
+
     try {
 
         const newPokemon = await Pokemon.create({
+            id: uuidv4(),
+            createdInDb: true,
             name, life, attack, defense, speed, height, weight, img
         });
         await newPokemon.setTypes(types);

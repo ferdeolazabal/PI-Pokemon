@@ -6,6 +6,7 @@ import {
     SORT_POKEMONS,
     GET_POKEMONS_DETAIL,
     GET_POKEMON_BY_NAME,
+    NEW_POKEMON,
 } from '../actions';
 
 const initialState = {
@@ -105,6 +106,11 @@ function rootReducer( state = initialState, { type, payload } ) {
             return {
                 ...state,
                 pokemons: validateName,
+            };
+        case NEW_POKEMON:
+            return {
+                ...state,
+                pokemons: payload,
             };
         default:
             return state;

@@ -4,24 +4,22 @@ import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { getPokemons } from '../redux/actions'
+import { getPokemons, newPokemon } from '../redux/actions'
 
 import NavBar from '../components/NavBar/NavBar.jsx'
 import constants from '../constants'
+import Swal from 'sweetalert2'
+
 import './formCreatePokemon.css'
 
 
 const FormCreatePokemon = () => {
 
-    const types = useSelector(state => state.types)
-    console.log('types', types)
-    console.log('types filter name', types.filter(type => type.name))
-
-    console.log('types.id', types.id)
-    console.log('types.name', types.name)
     const dispatch = useDispatch()
+    const types = useSelector(state => state.types)
 
     const [ input, setInput ] = useState({
+        // id: Math.floor(Math.random() * 10000),
         name: '',
         // img: '',
         life: '',
@@ -34,7 +32,6 @@ const FormCreatePokemon = () => {
 
     });
 
-
     function submitForm(e){
         e.preventDefault()
             if (!input.name) alert('Name your Pokemon!');
@@ -46,9 +43,17 @@ const FormCreatePokemon = () => {
             else if(!input.weight) alert('weight value is required')
             else if(!input.types) alert('type value is required')
             else {
-                axios.post(`${ constants.POKEMONS_URL }`, input)
+                
+                console.log(input)
+                dispatch( newPokemon( input ) )
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your pokemon has been created !',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 dispatch( getPokemons() );
-                alert('Pokemon Created!');
                 stateReset();
             };
     };
@@ -87,15 +92,19 @@ const FormCreatePokemon = () => {
     };
 
     const filterTypes = (id) => {
-        let filteredTypes = input.types.filter(
-        ( type ) => type !== id,
-        );
+        let filteredTypes = input.types.filter( ( type ) => type !== id,);
+        // let typeName = input.types.filter( ( type ) => type === id,); 
         
         setInput({
             ...input,
             types: filteredTypes,
         });
     };
+
+    const typeNamebyid = (id) => {
+        let typeName = types.filter( ( type ) => type.id === id,);
+        return typeName[0].name
+    }
 
     const [ submitButton, setSubmitButton ] = useState(true);
 
@@ -197,8 +206,13 @@ return (
                         <option >select type</option>
                         {
                             types && types?.map(type => (
-                                <option key={type.id} value={type.id} >{type.name}</option>
-                                ))
+                                <option 
+                                    key={type.id} 
+                                    value={type.id} 
+                                >
+                                    {type.name}
+                                </option>
+                            ))
                         }
                     </select>
                 </p>
@@ -218,33 +232,32 @@ return (
                 style={{ width: '50%' }}
             />
             <div>
-            <p>
-                Types selected{' '}
-                {/* {input.types.length <= 1 ? (
-                <span>type</span>
-                ) : (
-                <span>types</span>
-                )}
-                : */}
-            </p>
-            <ul>
-                { input.types.map((el) => (
-                <div key={el} className="preview_list">
-                <li>⭐ {el}</li>
-                    <button
-                    className="deleteButton"
-                    onClick={() => filterTypes(el)}
-                    >
-                    x
-                    </button>
-                </div>
-                )) }
-            </ul>
-            {
-                types && types?.map(type => (
-                    <option key={type.id} value={type.id} >{type.id}-{type.name}</option>
-                    ))
-            }
+                <p>
+                    {
+                        input.types.length <= 1 
+                            ? ( <span>Type:</span> ) 
+                            : ( <span>Types:</span> )
+                    }
+                </p>
+                <ul>
+                    { 
+                        input.types.map( id => (
+                    
+                            <div key={ id } className="preview_list">
+                                
+                                <li>⭐ { typeNamebyid( id ) }</li>
+                                <button
+                                    className="deleteButton"
+                                    onClick={() => filterTypes( id )}
+                                >
+                                    x
+                                </button>
+
+                            </div>
+                        )) 
+                    }
+
+                </ul>
             </div>
         </div>
         )}

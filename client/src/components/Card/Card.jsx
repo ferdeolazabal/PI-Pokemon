@@ -1,8 +1,8 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import { getPokemons } from '../../redux/actions'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { getPokemons } from '../../redux/actions';
 
 import './Card.css'
 
