@@ -19,9 +19,7 @@ const FormCreatePokemon = () => {
     const types = useSelector(state => state.types)
 
     const [ input, setInput ] = useState({
-        // id: Math.floor(Math.random() * 10000),
         name: '',
-        // img: '',
         life: '',
         attack: '',
         defense: '',
@@ -29,7 +27,6 @@ const FormCreatePokemon = () => {
         height: '',
         weight: '',
         types: [],
-
     });
 
     function submitForm(e){
@@ -93,7 +90,6 @@ const FormCreatePokemon = () => {
 
     const filterTypes = (id) => {
         let filteredTypes = input.types.filter( ( type ) => type !== id,);
-        // let typeName = input.types.filter( ( type ) => type === id,); 
         
         setInput({
             ...input,
