@@ -15,6 +15,7 @@ router.get('/pokemons', async (req, res, next) => {
     const { name } = req.query;
     try {
         if (!name) {
+            
             const allPokemons = await getAllPokemons();
             // console.log('allPokemons', allPokemons);
             res.status(200).json(allPokemons);

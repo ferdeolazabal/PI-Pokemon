@@ -14,6 +14,7 @@ const initialState = {
     allPokemons: [],
     types: [],
     pokemonDetail: [],
+    newPokemon: [],
 };
 
 function rootReducer( state = initialState, { type, payload } ) {
@@ -110,7 +111,7 @@ function rootReducer( state = initialState, { type, payload } ) {
         case NEW_POKEMON:
             return {
                 ...state,
-                pokemons: payload,
+                newPokemon: payload,
             };
         default:
             return state;

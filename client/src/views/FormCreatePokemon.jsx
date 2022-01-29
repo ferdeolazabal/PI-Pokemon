@@ -41,7 +41,7 @@ const FormCreatePokemon = () => {
             else if(!input.types) alert('type value is required')
             else {
                 
-                console.log(input)
+                // console.log(input)
                 dispatch( newPokemon( input ) )
                 Swal.fire({
                     position: 'top-end',
@@ -212,9 +212,10 @@ return (
                         }
                     </select>
                 </p>
-                <button className="submit_btn"
-                        disabled={submitButton}
-                        type="submit">
+                <button 
+                    className="submit_btn"
+                    disabled={submitButton}
+                    type="submit">
                         Catch it !
                 </button>
             </div>

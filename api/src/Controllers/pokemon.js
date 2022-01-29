@@ -4,7 +4,7 @@ const { Pokemon, Type } = require('../db')
 // Lista Pokemons desde api
 const getApiPokeList = async () => {
     
-    const totalPokemons = 10;
+    const totalPokemons = 40;
     
     try {
         const apiUrl = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${ totalPokemons }`);
@@ -99,7 +99,7 @@ const getDbInfo = async () => {
             };
             pokeArray.push(pokeInfo);
         });
-        // console.log('poke array en ontrolers',pokeArray);
+        console.log('poke array en ontrolers',pokeArray);
         return pokeArray;
         
     } catch (err) {
@@ -134,9 +134,9 @@ const getAllPokemons = async () => {
                 await isPokemons.addTypes(isType);
             });
             const promiseSolved = await Promise.all(chargeDbb);
-            console.log('promiseSolved', promiseSolved);
+            // console.log('promiseSolved', promiseSolved);
             const newDb = await getDbInfo();
-            console.log('newDb', newDb);
+            // console.log('newDb', newDb);
             return newDb;
 
         } else {
