@@ -7,9 +7,9 @@ import { getPokemons } from '../../redux/actions';
 import './Card.css'
 
 export default function Card ( pokemon ) {
-
+    
     const dispatch = useDispatch()
-    // console.log(pokemon.name)
+
     const handleEmptyFilter = () => {
         if(pokemon.name === 'Type not Found'){
             Swal.fire   ({  

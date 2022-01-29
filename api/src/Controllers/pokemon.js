@@ -25,7 +25,6 @@ const getApiPokeList = async () => {
                 types: poke.types.map(type => type.type.name),
             };
         });
-        // console.log('infoPokemons', infoPokemons);
         return infoPokemons;
         
     } catch (err) {
@@ -99,7 +98,7 @@ const getDbInfo = async () => {
             };
             pokeArray.push(pokeInfo);
         });
-        console.log('poke array en ontrolers',pokeArray);
+        // console.log('poke array en controllers',pokeArray);
         return pokeArray;
         
     } catch (err) {
@@ -112,7 +111,7 @@ const getDbInfo = async () => {
 const getAllPokemons = async () => {
     
     const db = await getDbInfo();
-    console.log('first db', db);
+    // console.log('first db', db);
     try {
         if (db.length === 0) {
             console.log("Vamos a llenar la base de datos...");

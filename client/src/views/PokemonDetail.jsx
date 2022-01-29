@@ -11,7 +11,6 @@ const PokemonDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const pokemonDetail = useSelector(state => state.pokemonDetail);
-    console.log(pokemonDetail)
 
     useEffect(() => {
         dispatch(getPokemonDetail( id ))
@@ -19,7 +18,7 @@ const PokemonDetail = () => {
 
     const { img, life, types, name, height, attack, defense, speed, weight } = pokemonDetail;
 
-
+    
     return (
         <div className="detailcontainer" key="100">
 
