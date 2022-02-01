@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { getSource, getFilterType, sortPokemons } from '../../redux/actions'
 
-
 export default function FilterSorts () {
     
     const dispatch = useDispatch()

@@ -6,6 +6,7 @@ import {
     SORT_POKEMONS,
     GET_POKEMONS_DETAIL,
     GET_POKEMON_BY_NAME,
+    NEW_POKEMON,
 } from '../actions';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
     allPokemons: [],
     types: [],
     pokemonDetail: [],
+    newPokemon: [],
 };
 
 function rootReducer( state = initialState, { type, payload } ) {
@@ -101,10 +103,14 @@ function rootReducer( state = initialState, { type, payload } ) {
                     pokemonDetail: payload,
             };
         case GET_POKEMON_BY_NAME:
-            const validateName = payload[0].status === 404 ? [ { name:'Pokemon not Found' } ] : payload;
             return {
                 ...state,
-                pokemons: validateName,
+                pokemons: [ payload ] ,
+            };
+        case NEW_POKEMON:
+            return {
+                ...state,
+                newPokemon: payload,
             };
         default:
             return state;

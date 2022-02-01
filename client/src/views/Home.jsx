@@ -21,7 +21,8 @@ const indexOfLastPoke = currentPage === 1 ?
 const indexOfFirstPoke = currentPage === 1 ?
                             indexOfLastPoke - pokemonsPerPage :
                             indexOfLastPoke - setPokemonsPerPage; 
-const currentPokemons = pokemons.slice(indexOfFirstPoke, indexOfLastPoke);
+const currentPokemons = pokemons?.slice(indexOfFirstPoke, indexOfLastPoke);
+
 const paginate = pageNumber => setCurrentPage(pageNumber); 
 
 

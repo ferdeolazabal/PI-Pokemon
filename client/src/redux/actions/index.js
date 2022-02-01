@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import constants from '../../constants';
 
 export const GET_POKEMONS             = 'GET_POKEMONS';
@@ -8,6 +9,7 @@ export const FILTER_POKEMON_BY_TYPE   = 'FILTER_POKEMON_BY_TYPE';
 export const FILTER_POKEMON_BY_SOURCE = 'FILTER_POKEMON_BY_SOURCE';
 export const SORT_POKEMONS            = 'SORT_POKEMONS';
 export const GET_POKEMON_BY_NAME      = 'GET_POKEMON_BY_NAME';
+export const NEW_POKEMON              = 'NEW_POKEMON';
 
 export function getPokemons () {
 
@@ -47,6 +49,20 @@ export const getTypes = () => {
     };
 };
 
+export function newPokemon(data) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post(`${ constants.POKEMONS_URL }`, data);
+            dispatch({
+                type: NEW_POKEMON,
+                payload: response.data,
+            });
+        } catch (error) {
+            console.log(error.response);
+        }
+    };
+}
+
 export const getSource = ( payload ) => {   
 
     return {
@@ -57,11 +73,26 @@ export const getSource = ( payload ) => {
 
 export const getFilterType = ( payload ) => {
     
+    console.log('type en action',payload);
     return {
+
+
         type: FILTER_POKEMON_BY_TYPE,
         payload
     };
 };
+
+// export const emptyFilter = () => {
+//     return {
+//         type: FILTER_POKEMON_BY_TYPE,
+//         payload: 
+//         Swal.fire   ({  
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'No hay pokemons con ese tipo, intenta con otro!',
+//         })
+//     };
+// };
 
 export const sortPokemons = ( payload ) => {
 
@@ -87,12 +118,20 @@ export const getPokemonName = (name) => {
     return async (dispatch) => {
         try {
             const pokemonName = await axios(`http://localhost:3001/pokemons?name=${name}`);
-            const pokeArray = [];
-            pokeArray.push(pokemonName.data);
-            return dispatch({
-                type: GET_POKEMON_BY_NAME,
-                payload: pokeArray
-            });
+            // console.log(pokemonName.data);
+
+            if (pokemonName.data === 'Pokemon no encontrado') {
+                Swal.fire({
+                    title: 'Pokemon no encontrado',
+                    text: 'Intenta con otro nombre !',
+                    icon: 'warning',
+                })
+            } else {
+                dispatch({
+                    type: GET_POKEMON_BY_NAME,
+                    payload: pokemonName.data
+                });
+            }
         } catch (error) {
             console.log(error)
         };

@@ -18,14 +18,15 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn, Type } = require('./src/db.js');  
-const { infoTypeApy } = require('./src/Controllers/type') 
+const { conn, Type, Pokemon } = require('./src/db.js');  
+const { infoTypeApy } = require('./src/Controllers/type'); 
 
-// Syncing all the models at once.
+
 conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     
     try{
+      
       const typeList= await infoTypeApy();
       const foundTypesDB = await Type.findAll({
         attributes: ['name']
@@ -34,10 +35,11 @@ conn.sync({ force: false }).then(() => {
       if(foundTypesDB.length === 0){
         await Type.bulkCreate(typeList)
       }
+      
     } catch(error) {
-      next(error);
+      console.error(error);
     }
       console.log('server listening at 3001'); // eslint-disable-line no-console
-      console.log('DB connected, pokemon types preloaded!');
+      console.log('DB connected, Pokemons && types preloaded!');
   });
 }); 

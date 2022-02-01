@@ -17,8 +17,8 @@ export default function App() {
 
   useEffect(() => {
 
-    dispatch( getPokemons() );
     dispatch( getTypes() );
+    dispatch( getPokemons() );
   }, [dispatch])
 
   return (
@@ -28,7 +28,6 @@ export default function App() {
           <Route exact path="/" component={ Main } />
           <Route path="/home" component={ Home } />
           <Route path="/pokemoncreate" component={ FormCreatePokemon } />
-          {/* <Route path="/pokemons?name=/:name" component={ SearchPoke } /> */}
           <Route path="/pokemons/id/:id" component={ PokemonDetail } />
         </Switch>
       </div>
