@@ -8,10 +8,10 @@ import './Card.css'
 
 export default function Card ( pokemon ) {
     
-    console.log('pokemon en card',pokemon);
     const dispatch = useDispatch()
 
     const handleEmptyFilter = () => {
+        
         if(pokemon.name === 'Type not Found'){
             Swal.fire   ({  
                 icon: 'warning',
@@ -20,16 +20,11 @@ export default function Card ( pokemon ) {
             })
             dispatch(getPokemons())
 
-        } else if (pokemon.name === 'Pokemon not Found'){
-            Swal.fire   ({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'No hay pokemons con ese nombre, intenta con otro!',
-            })
-            dispatch(getPokemons())
-        };
+        }else{
             return pokemon.name
-    }
+        }
+}
+
 
     return (
     <div className="card">
@@ -45,7 +40,7 @@ export default function Card ( pokemon ) {
 
                 <>
                     {
-                        pokemon.types[0].PokemonType ?
+                        pokemon.types && pokemon.types[0].PokemonType ?
                         pokemon.types.map(type =>
                             <p className="type" key={type.id}>{ pokemon.types[0].name }</p>
                             ) : <></>

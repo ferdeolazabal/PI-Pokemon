@@ -82,6 +82,18 @@ export const getFilterType = ( payload ) => {
     };
 };
 
+// export const emptyFilter = () => {
+//     return {
+//         type: FILTER_POKEMON_BY_TYPE,
+//         payload: 
+//         Swal.fire   ({  
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'No hay pokemons con ese tipo, intenta con otro!',
+//         })
+//     };
+// };
+
 export const sortPokemons = ( payload ) => {
 
     return {
