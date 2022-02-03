@@ -11,7 +11,7 @@
 
 ## Live Test
 
-[https://pokemons-app.surge.sh/](`https://pokemons-app.surge.sh/`)
+[https://pokemons-app.surge.sh/](https://pokemons-app.surge.sh/)
 
 ## Herramientas usadas en el proyecto
 
