@@ -1,13 +1,9 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
-
 import { useDispatch } from 'react-redux'
 import { getPokemons, newPokemon } from '../redux/actions'
-
 import NavBar from '../components/NavBar/NavBar.jsx'
-import constants from '../constants'
 import Swal from 'sweetalert2'
 
 import './formCreatePokemon.css'
@@ -31,28 +27,29 @@ const FormCreatePokemon = () => {
 
     function submitForm(e){
         e.preventDefault()
-            if (!input.name) alert('Name your Pokemon!');
-            else if(!input.life) alert('life value is required');
-            else if(!input.attack) alert('attack value is required')
-            else if(!input.defense) alert('defense value is required')
-            else if(!input.speed) alert('speed value is required')
-            else if(!input.height) alert('height value is required')
-            else if(!input.weight) alert('weight value is required')
-            else if(!input.types) alert('type value is required')
-            else {
-                
-                // console.log(input)
-                dispatch( newPokemon( input ) )
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your pokemon has been created !',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                dispatch( getPokemons() );
-                stateReset();
-            };
+        
+        // if (!input.name) alert('Name your Pokemon!');
+        // else if(!input.life) alert('life value is required');
+        // else if(!input.attack) alert('attack value is required')
+        // else if(!input.defense) alert('defense value is required')
+        // else if(!input.speed) alert('speed value is required')
+        // else if(!input.height) alert('height value is required')
+        // else if(!input.weight) alert('weight value is required')
+        // else if(!input.types) alert('type value is required')
+        // else {
+            
+            // console.log(input)
+            dispatch( newPokemon( input ) )
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your pokemon has been created !',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            dispatch( getPokemons() );
+            stateReset();
+        // };
     };
 
     function stateReset(){
