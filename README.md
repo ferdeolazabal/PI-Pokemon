@@ -104,3 +104,17 @@ Se desarrolló Testing en:
 - [ ] Componentes proncipales del frontend, con sus tests respectivos.
 - [ ] Rutas principales del backend, con sus tests respectivos.
 - [ ] Modelo Pokemon de la base de datos, con su test respectivo.
+
+
+## Scripts Disponibles
+
+`npm install`
+- En carpeta api y client respectivamente para instalar las dependencias.
+
+
+`npm start`
+- En carpeta api y client respectivamente para correr la aplicacion. -(agregar archivo de entorno en api)
+
+
+`npm run test`
+- En carpeta api y client respectivamente para correr los tests.
